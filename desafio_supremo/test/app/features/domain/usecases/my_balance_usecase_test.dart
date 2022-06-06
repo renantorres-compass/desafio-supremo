@@ -15,35 +15,33 @@ void main() {
   final repository = MyBalanceRepositoryMock();
   final usecase = MyBalanceUsecaseImplementation(repository);
   final amount = BalanceEntityMock();
-  var id = faker.guid.guid();
 
   test('Should return an amount value', () async {
-    when(() => repository.getAmountValue(id))
+    when(() => repository.getAmountValue())
         .thenAnswer((_) async => Right(amount));
-
-    final result = await usecase(id);
+    final result = await usecase();
 
     expect(result, Right(amount));
-    verify(() => repository.getAmountValue(id)).called(1);
+    verify(() => repository.getAmountValue()).called(1);
   });
 
   test('Should return an Server Error when dont succeed', () async {
-    when(() => repository.getAmountValue(id))
+    when(() => repository.getAmountValue())
         .thenAnswer((_) async => Left(ServerError()));
 
-    final result = await usecase(id);
+    final result = await usecase();
 
     expect(result, Left(ServerError()));
-    verify(() => repository.getAmountValue(id)).called(1);
+    verify(() => repository.getAmountValue()).called(1);
   });
 
-  test('Should return an Invalid Id Error when input a wrong ID', () async {
-    when(() => repository.getAmountValue(id))
-        .thenAnswer((_) async => Left(InvalidIDError()));
+  // test('Should return an Invalid Id Error when input a wrong ID', () async {
+  //   when(() => repository.getAmountValue())
+  //       .thenAnswer((_) async => Left(InvalidIDError()));
 
-    final result = await usecase(id);
+  //   final result = await usecase();
 
-    expect(result, Left(InvalidIDError()));
-    verify(() => repository.getAmountValue(id)).called(1);
-  });
+  //   expect(result, Left(InvalidIDError()));
+  //   verify(() => repository.getAmountValue()).called(1);
+  // });
 }

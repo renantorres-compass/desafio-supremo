@@ -9,9 +9,9 @@ class MyBalanceRepositoryImpl implements MyBalanceRepository {
 
   MyBalanceRepositoryImpl(this.datasource);
   @override
-  Future<Either<FailureError, BalanceEntity>> getAmountValue(String id) async {
+  Future<Either<FailureError, BalanceEntity>> getAmountValue() async {
     try {
-      final result = await datasource.getAmountValue(id);
+      final result = await datasource.getAmountValue();
       return Right(result);
     } catch (e) {
       return Left(DatasourceError());

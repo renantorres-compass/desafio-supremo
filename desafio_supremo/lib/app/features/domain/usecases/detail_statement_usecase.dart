@@ -5,7 +5,7 @@ import '../entities/detail_statement.dart';
 import '../errors/errors.dart';
 
 abstract class DetailStatementUsecase {
-  Future<Either<FailureError, DetailStatementEntity>> call();
+  Future<Either<FailureError, DetailStatementEntity>> call(String id);
 }
 
 class DetailStatementUsecaseImpl implements DetailStatementUsecase {
@@ -13,8 +13,8 @@ class DetailStatementUsecaseImpl implements DetailStatementUsecase {
 
   DetailStatementUsecaseImpl(this.repository);
   @override
-  Future<Either<FailureError, DetailStatementEntity>> call() async {
-    final result = await repository.getDetailStatement();
+  Future<Either<FailureError, DetailStatementEntity>> call(String id) async {
+    final result = await repository.getDetailStatement(id);
     return result;
   }
 }

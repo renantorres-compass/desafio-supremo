@@ -12,22 +12,22 @@ class MyBalanceDatasourceMock extends Mock implements MyBalanceDatasource {}
 void main() {
   final datasource = MyBalanceDatasourceMock();
   final repository = MyBalanceRepositoryImpl(datasource);
-  var id = faker.guid.guid();
+
   final amount = BalanceModel(amount: 1234);
 
   test("Should return a Balance Model", () async {
-    when(() => datasource.getAmountValue(id)).thenAnswer((_) async => amount);
+    when(() => datasource.getAmountValue()).thenAnswer((_) async => amount);
 
-    final result = await repository.getAmountValue(id);
+    final result = await repository.getAmountValue();
 
     expect(result, Right(amount));
   });
 
   test("Should return a Datasource Error when dont succeed", () async {
-    when(() => datasource.getAmountValue(id))
+    when(() => datasource.getAmountValue())
         .thenThrow((_) async => DatasourceError());
 
-    final result = await repository.getAmountValue(id);
+    final result = await repository.getAmountValue();
 
     expect(result, Left(DatasourceError()));
   });

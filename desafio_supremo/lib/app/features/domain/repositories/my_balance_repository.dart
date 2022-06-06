@@ -4,5 +4,5 @@ import '../entities/balance_entity.dart';
 import '../errors/errors.dart';
 
 abstract class MyBalanceRepository {
-  Future<Either<FailureError, BalanceEntity>> getAmountValue(String id);
+  Future<Either<FailureError, BalanceEntity>> getAmountValue();
 }

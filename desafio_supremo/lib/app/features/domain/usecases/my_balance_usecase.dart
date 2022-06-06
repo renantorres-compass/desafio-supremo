@@ -5,7 +5,7 @@ import '../errors/errors.dart';
 import '../repositories/my_balance_repository.dart';
 
 abstract class MyBalanceUsecase {
-  Future<Either<FailureError, BalanceEntity>> call(String id);
+  Future<Either<FailureError, BalanceEntity>> call();
 }
 
 class MyBalanceUsecaseImplementation implements MyBalanceUsecase {
@@ -13,8 +13,8 @@ class MyBalanceUsecaseImplementation implements MyBalanceUsecase {
 
   MyBalanceUsecaseImplementation(this.repository);
   @override
-  Future<Either<FailureError, BalanceEntity>> call(String id) async {
-    final result = await repository.getAmountValue(id);
+  Future<Either<FailureError, BalanceEntity>> call() async {
+    final result = await repository.getAmountValue();
     return result;
   }
 }
