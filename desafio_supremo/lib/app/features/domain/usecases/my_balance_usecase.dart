@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:desafio_supremo/app/features/domain/entities/balance_entity.dart';
-import 'package:desafio_supremo/app/features/domain/errors/errors.dart';
-import 'package:desafio_supremo/app/features/domain/repositories/my_balance_repository.dart';
+
+import '../entities/balance_entity.dart';
+import '../errors/errors.dart';
+import '../repositories/my_balance_repository.dart';
 
 abstract class MyBalanceUsecase {
   Future<Either<FailureError, BalanceEntity>> call();
