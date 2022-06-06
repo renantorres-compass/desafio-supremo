@@ -6,3 +6,8 @@ class ServerError extends FailureError {
   @override
   List<Object?> get props => [];
 }
+
+class InvalidIDError extends FailureError {
+  @override
+  List<Object?> get props => [];
+}

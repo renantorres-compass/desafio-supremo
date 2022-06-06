@@ -36,4 +36,14 @@ void main() {
     expect(result, Left(ServerError()));
     verify(() => repository.getAmountValue(id)).called(1);
   });
+
+  test('Should return an Invalid Id Error when input a wrong ID', () async {
+    when(() => repository.getAmountValue(id))
+        .thenAnswer((_) async => Left(InvalidIDError()));
+
+    final result = await usecase(id);
+
+    expect(result, Left(InvalidIDError()));
+    verify(() => repository.getAmountValue(id)).called(1);
+  });
 }
