@@ -11,3 +11,8 @@ class InvalidIDError extends FailureError {
   @override
   List<Object?> get props => [];
 }
+
+class DatasourceError extends FailureError {
+  @override
+  List<Object?> get props => [];
+}
