@@ -16,3 +16,8 @@ class DatasourceError extends FailureError {
   @override
   List<Object?> get props => [];
 }
+
+class NullError extends FailureError {
+  @override
+  List<Object?> get props => [];
+}

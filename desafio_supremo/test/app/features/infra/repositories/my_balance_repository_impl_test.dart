@@ -21,6 +21,7 @@ void main() {
     final result = await repository.getAmountValue();
 
     expect(result, Right(amount));
+    verify(() => datasource.getAmountValue()).called(1);
   });
 
   test("Should return a Datasource Error when dont succeed", () async {
@@ -30,5 +31,6 @@ void main() {
     final result = await repository.getAmountValue();
 
     expect(result, Left(DatasourceError()));
+    verify(() => datasource.getAmountValue()).called(1);
   });
 }

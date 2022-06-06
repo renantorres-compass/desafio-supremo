@@ -30,6 +30,7 @@ void main() {
     final result = await repository.getDetailStatement(id);
 
     expect(result, Right(detailStatement));
+    verify(() => datasource.getDetailStatement(id)).called(1);
   });
 
   test("Should return a Datasource Error when dont succeed", () async {
@@ -39,5 +40,6 @@ void main() {
     final result = await repository.getDetailStatement(id);
 
     expect(result, Left(DatasourceError()));
+    verify(() => datasource.getDetailStatement(id)).called(1);
   });
 }

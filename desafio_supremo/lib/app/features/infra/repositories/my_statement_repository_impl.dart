@@ -2,11 +2,20 @@ import 'package:desafio_supremo/app/features/domain/errors/errors.dart';
 import 'package:desafio_supremo/app/features/domain/entities/statement_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:desafio_supremo/app/features/domain/repositories/my_statement_repository.dart';
+import 'package:desafio_supremo/app/features/infra/datasource/my_statement_datasource.dart';
 
 class MyStatementRepositoryImpl extends MyStatementRepository {
+  final MyStatementDatasource datasource;
+
+  MyStatementRepositoryImpl(this.datasource);
   @override
-  Future<Either<FailureError, List<StatementEntity>>> getMyStatementsList() {
-    // TODO: implement getMyStatementsList
-    throw UnimplementedError();
+  Future<Either<FailureError, List<StatementEntity>>>
+      getMyStatementsList() async {
+    try {
+      final result = await datasource.getMyStatementsList();
+      return result != null ? Right(result) : Left(NullError());
+    } catch (e) {
+      return Left(DatasourceError());
+    }
   }
 }
