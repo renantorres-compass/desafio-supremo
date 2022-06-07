@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 
 import '../../../../infra/models/balance_model/balance_model.dart';
-import '../../../endpoints/endpoints.dart';
 
 part 'my_balance_service.g.dart';
 
@@ -11,7 +10,7 @@ part 'my_balance_service.g.dart';
 abstract class MyBalanceService {
   factory MyBalanceService(Dio dio, {String baseUrl}) = _MyBalanceService;
 
-  @GET(DioEndpoints.myBalanceEndpoint)
+  @GET(Api.myBalanceEndpoint)
   Future<BalanceModel?> getMyBalance(
     @Header(Auth.tokenHeader) String token,
   );

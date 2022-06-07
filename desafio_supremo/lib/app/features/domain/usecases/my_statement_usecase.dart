@@ -5,7 +5,7 @@ import '../errors/errors.dart';
 import '../repositories/repositories.dart';
 
 abstract class MyStatementUsecase {
-  Future<Either<FailureError, List<StatementEntity>>> call();
+  Future<Either<FailureError, StatementItemsEntity>> call();
 }
 
 class MyStatementUsecaseImpl implements MyStatementUsecase {
@@ -13,7 +13,7 @@ class MyStatementUsecaseImpl implements MyStatementUsecase {
 
   MyStatementUsecaseImpl(this.repository);
   @override
-  Future<Either<FailureError, List<StatementEntity>>> call() async {
+  Future<Either<FailureError, StatementItemsEntity>> call() async {
     final result = await repository.getMyStatementsList();
     return result;
   }

@@ -9,7 +9,7 @@ class MyStatementRepositoryImpl extends MyStatementRepository {
 
   MyStatementRepositoryImpl(this.datasource);
   @override
-  Future<Either<FailureError, List<StatementEntity>>>
+  Future<Either<FailureError, StatementItemsEntity>>
       getMyStatementsList() async {
     try {
       final result = await datasource.getMyStatementsList();

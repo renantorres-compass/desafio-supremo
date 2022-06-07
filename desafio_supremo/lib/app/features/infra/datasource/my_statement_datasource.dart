@@ -1,5 +1,5 @@
-import 'package:desafio_supremo/app/features/infra/models/statement_model/statement_model.dart';
+import '../models/statement_items_model/statement_items_model.dart';
 
 abstract class MyStatementDatasource {
-  Future<List<StatementModel>?> getMyStatementsList();
+  Future<StatementItemsModel?> getMyStatementsList();
 }

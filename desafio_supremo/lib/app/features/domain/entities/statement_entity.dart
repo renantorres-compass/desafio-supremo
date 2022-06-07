@@ -1,3 +1,5 @@
+import 'package:json_annotation/json_annotation.dart';
+
 abstract class StatementEntity {
   final String createdAt;
   final String id;
@@ -13,4 +15,10 @@ abstract class StatementEntity {
       required this.to,
       required this.description,
       required this.tType});
+}
+
+abstract class StatementItemsEntity {
+  final List<StatementEntity> items;
+
+  StatementItemsEntity({required this.items});
 }

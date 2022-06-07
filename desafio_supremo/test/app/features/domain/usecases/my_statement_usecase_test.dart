@@ -8,19 +8,19 @@ import 'package:mocktail/mocktail.dart';
 
 class MyStatementRepositoryMock extends Mock implements MyStatementRepository {}
 
-class StatementEntityMock extends Mock implements StatementEntity {}
+class StatementItemsEntityMock extends Mock implements StatementItemsEntity {}
 
 void main() {
   final repository = MyStatementRepositoryMock();
   final usecase = MyStatementUsecaseImpl(repository);
-  final list = [StatementEntityMock()];
+  final items = StatementItemsEntityMock();
 
   test('Should return a list of My Statement Entity', () async {
     when(() => repository.getMyStatementsList())
-        .thenAnswer((_) async => Right(list));
+        .thenAnswer((_) async => Right(items));
 
     final result = await usecase();
-    expect(result, Right(list));
+    expect(result, Right(items));
     verify(() => repository.getMyStatementsList()).called(1);
   });
 

@@ -4,5 +4,5 @@ import '../entities/entities.dart';
 import '../errors/errors.dart';
 
 abstract class MyStatementRepository {
-  Future<Either<FailureError, List<StatementEntity>>> getMyStatementsList();
+  Future<Either<FailureError, StatementItemsEntity>> getMyStatementsList();
 }
