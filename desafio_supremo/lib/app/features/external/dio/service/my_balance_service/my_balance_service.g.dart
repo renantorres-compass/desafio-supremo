@@ -18,7 +18,7 @@ class _MyBalanceService implements MyBalanceService {
   String? baseUrl;
 
   @override
-  Future<BalanceModel>? getMyBalance(token) async {
+  Future<BalanceModel> getMyBalance(token) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'token': token};

@@ -3,7 +3,6 @@ import 'package:desafio_supremo/app/features/domain/entities/balance_entity.dart
 import 'package:desafio_supremo/app/features/domain/errors/errors.dart';
 import 'package:desafio_supremo/app/features/domain/repositories/my_balance_repository.dart';
 import 'package:desafio_supremo/app/features/domain/usecases/my_balance_usecase.dart';
-import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
