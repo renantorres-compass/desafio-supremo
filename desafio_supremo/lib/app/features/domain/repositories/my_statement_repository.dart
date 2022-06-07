@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 
-import '../entities/statement_entity.dart';
+import '../entities/entities.dart';
 import '../errors/errors.dart';
 
 abstract class MyStatementRepository {

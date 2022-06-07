@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 
-import '../entities/balance_entity.dart';
 import '../errors/errors.dart';
-import '../repositories/my_balance_repository.dart';
+import '../entities/entities.dart';
+import '../repositories/repositories.dart';
 
 abstract class MyBalanceUsecase {
   Future<Either<FailureError, BalanceEntity>> call();

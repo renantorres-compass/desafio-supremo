@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:desafio_supremo/app/features/domain/entities/statement_entity.dart';
-import 'package:desafio_supremo/app/features/domain/errors/errors.dart';
-import 'package:desafio_supremo/app/features/domain/repositories/my_statement_repository.dart';
+
+import '../entities/entities.dart';
+import '../errors/errors.dart';
+import '../repositories/repositories.dart';
 
 abstract class MyStatementUsecase {
   Future<Either<FailureError, List<StatementEntity>>> call();

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 
-import '../entities/detail_statement.dart';
+import '../entities/entities.dart';
 import '../errors/errors.dart';
 
 abstract class DetailStatementRepository {

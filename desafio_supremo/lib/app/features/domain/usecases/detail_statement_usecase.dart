@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:desafio_supremo/app/features/domain/repositories/detail_statement_repository.dart';
 
-import '../entities/detail_statement.dart';
 import '../errors/errors.dart';
+import '../entities/entities.dart';
+import '../repositories/repositories.dart';
 
 abstract class DetailStatementUsecase {
   Future<Either<FailureError, DetailStatementEntity>> call(String id);
