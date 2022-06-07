@@ -29,4 +29,12 @@ void main() {
     expect(result, detailStatement);
     verify(() => service.getStatementDetail(Auth.tokenValue, id)).called(1);
   });
+
+  test('Should return a null value if receives null', () async {
+    when(() => service.getStatementDetail(Auth.tokenValue, id))
+        .thenAnswer((_) async => null);
+    final result = await datasource.getDetailStatement(id);
+    expect(result, null);
+    verify(() => service.getStatementDetail(Auth.tokenValue, id)).called(1);
+  });
 }
