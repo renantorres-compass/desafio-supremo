@@ -12,7 +12,7 @@ abstract class MyBalanceService {
   factory MyBalanceService(Dio dio, {String baseUrl}) = _MyBalanceService;
 
   @GET(DioEndpoints.myBalanceEndpoint)
-  Future<BalanceModel> getMyBalance(
-    @Header(Auth.token) String token,
+  Future<BalanceModel>? getMyBalance(
+    @Header(Auth.tokenHeader) String token,
   );
 }
