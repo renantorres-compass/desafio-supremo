@@ -4,4 +4,6 @@ abstract class Api {
   static const String myBalanceEndpoint = "myBalance";
 
   static const String myStatementEndpoint = "/myStatement/:limit/:offset";
+
+  static const String detailStatementEndpoint = "/myStatement/detail";
 }
