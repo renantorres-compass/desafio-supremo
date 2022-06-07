@@ -8,8 +8,8 @@ part of 'detail_statement_service.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps
 
-class _StatementDetailService implements StatementDetailService {
-  _StatementDetailService(this._dio, {this.baseUrl}) {
+class _DetailStatementService implements DetailStatementService {
+  _DetailStatementService(this._dio, {this.baseUrl}) {
     baseUrl ??= 'https://bank-statement-bff.herokuapp.com/';
   }
 
@@ -18,20 +18,21 @@ class _StatementDetailService implements StatementDetailService {
   String? baseUrl;
 
   @override
-  Future<BalanceModel?> getMyBalance(token, id) async {
+  Future<DetailStatementModel?> getStatementDetail(token, id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'token': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>?>(
-        _setStreamType<BalanceModel>(
+        _setStreamType<DetailStatementModel>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/myStatement/detail/${id}',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value =
-        _result.data == null ? null : BalanceModel.fromJson(_result.data!);
+    final value = _result.data == null
+        ? null
+        : DetailStatementModel.fromJson(_result.data!);
     return value;
   }
 
