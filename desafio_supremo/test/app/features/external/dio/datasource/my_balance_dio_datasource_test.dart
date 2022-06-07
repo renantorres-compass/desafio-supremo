@@ -2,7 +2,6 @@ import 'package:desafio_supremo/app/core/constants/auth.dart';
 import 'package:desafio_supremo/app/features/external/dio/datasource/my_balance_dio_datasource.dart';
 import 'package:desafio_supremo/app/features/external/dio/service/my_balance_service/my_balance_service.dart';
 import 'package:desafio_supremo/app/features/infra/models/balance_model/balance_model.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -18,6 +17,14 @@ void main() {
         .thenAnswer((_) async => myBalance);
     final result = await datasource.getAmountValue();
     expect(result, myBalance);
+    verify(() => service.getMyBalance(Auth.tokenValue)).called(1);
+  });
+
+  test('Should return a null value if receives null', () async {
+    when(() => service.getMyBalance(Auth.tokenValue))
+        .thenAnswer((_) async => null);
+    final result = await datasource.getAmountValue();
+    expect(result, null);
     verify(() => service.getMyBalance(Auth.tokenValue)).called(1);
   });
 }

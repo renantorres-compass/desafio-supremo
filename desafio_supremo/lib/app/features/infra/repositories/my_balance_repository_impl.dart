@@ -12,7 +12,7 @@ class MyBalanceRepositoryImpl implements MyBalanceRepository {
   Future<Either<FailureError, BalanceEntity>> getAmountValue() async {
     try {
       final result = await datasource.getAmountValue();
-      return Right(result);
+      return result != null ? Right(result) : Left(NullError());
     } catch (e) {
       return Left(DatasourceError());
     }

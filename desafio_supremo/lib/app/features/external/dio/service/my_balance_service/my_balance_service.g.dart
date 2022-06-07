@@ -18,19 +18,20 @@ class _MyBalanceService implements MyBalanceService {
   String? baseUrl;
 
   @override
-  Future<BalanceModel> getMyBalance(token) async {
+  Future<BalanceModel?> getMyBalance(token) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'token': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
+    final _result = await _dio.fetch<Map<String, dynamic>?>(
         _setStreamType<BalanceModel>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, 'myBalance',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BalanceModel.fromJson(_result.data!);
+    final value =
+        _result.data == null ? null : BalanceModel.fromJson(_result.data!);
     return value;
   }
 

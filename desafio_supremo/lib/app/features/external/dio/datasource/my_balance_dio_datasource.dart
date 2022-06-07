@@ -9,12 +9,13 @@ class MyBalanceDioDatasource implements MyBalanceDatasource {
 
   MyBalanceDioDatasource(this.service);
   @override
-  Future<BalanceModel> getAmountValue() async {
+  Future<BalanceModel?> getAmountValue() async {
     try {
       final result = await service.getMyBalance(Auth.tokenValue);
+
       return result;
     } on DioError catch (e) {
-      throw Exception(e.message);
+      return null;
     }
   }
 }
