@@ -26,5 +26,5 @@ class MyBalanceErrorState extends MyBalanceState {
   const MyBalanceErrorState() : super(balance: null);
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [balance];
 }
