@@ -6,14 +6,14 @@ abstract class MyBalanceState {
   MyBalanceState({required this.balance});
 }
 
-class InitialMyBalanceState extends MyBalanceState {
-  InitialMyBalanceState() : super(balance: BalanceModel(amount: 0));
+class MyBalanceInitialState extends MyBalanceState {
+  MyBalanceInitialState() : super(balance: BalanceModel(amount: 0));
 }
 
-class SuccessMyBalanceState extends MyBalanceState {
-  SuccessMyBalanceState({required super.balance});
+class MyBalanceSuccessState extends MyBalanceState {
+  MyBalanceSuccessState({required super.balance});
 }
 
-class MyBalanceStateError extends MyBalanceState {
-  MyBalanceStateError() : super(balance: null);
+class MyBalanceErrorState extends MyBalanceState {
+  MyBalanceErrorState() : super(balance: null);
 }

@@ -9,7 +9,10 @@ import '../../../domain/entities/entities.dart';
 class MyBalanceBloc extends Bloc<MyBalanceEvents, MyBalanceState> {
   final MyBalanceUsecase usecase;
 
-  MyBalanceBloc(this.usecase) : super(InitialMyBalanceState());
+  MyBalanceBloc(this.usecase) : super(MyBalanceInitialState()) {
+    on<LoadMyBalanceEvents>((event, emit) async =>
+        emit(MyBalanceSuccessState(balance: await _getMyBalance())));
+  }
 
   Future<BalanceModel> _getMyBalance() async {
     BalanceModel balanceModel = BalanceModel(amount: 0);
