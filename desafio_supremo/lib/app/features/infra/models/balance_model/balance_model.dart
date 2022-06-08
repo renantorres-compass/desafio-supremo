@@ -5,7 +5,7 @@ part 'balance_model.g.dart';
 
 @JsonSerializable()
 class BalanceModel extends BalanceEntity {
-  BalanceModel({required super.amount});
+  BalanceModel({super.amount});
 
   factory BalanceModel.fromJson(Map<String, dynamic> json) =>
       _$BalanceModelFromJson(json);

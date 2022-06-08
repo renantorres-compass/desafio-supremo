@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import '../../../infra/models/detail_statement_model/detail_statement_model.dart';
 
 abstract class DetailStatementState extends Equatable {
-  final DetailStatementModel detailStatement;
+  final DetailStatementModel? detailStatement;
   const DetailStatementState({required this.detailStatement});
 }
 

@@ -6,13 +6,13 @@ part 'detail_statement_model.g.dart';
 @JsonSerializable()
 class DetailStatementModel extends DetailStatementEntity {
   DetailStatementModel(
-      {required super.amount,
-      required super.id,
-      required super.authentication,
-      required super.tType,
-      required super.createdAt,
-      required super.to,
-      required super.description});
+      {super.amount,
+      super.id,
+      super.authentication,
+      super.tType,
+      super.createdAt,
+      super.to,
+      super.description});
 
   factory DetailStatementModel.fromJson(Map<String, dynamic> json) =>
       _$DetailStatementModelFromJson(json);

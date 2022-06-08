@@ -1,5 +1,5 @@
 abstract class BalanceEntity {
-  final num amount;
+  final num? amount;
 
-  BalanceEntity({required this.amount});
+  BalanceEntity({this.amount});
 }

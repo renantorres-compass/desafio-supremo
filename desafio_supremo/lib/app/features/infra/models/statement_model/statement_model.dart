@@ -6,12 +6,14 @@ part 'statement_model.g.dart';
 @JsonSerializable()
 class StatementModel extends StatementEntity {
   StatementModel(
-      {required super.createdAt,
-      required super.id,
-      required super.amount,
-      required super.to,
-      required super.description,
-      required super.tType});
+      {super.createdAt,
+      super.id,
+      super.amount,
+      super.to,
+      super.description,
+      super.tType,
+      super.bankName,
+      super.from});
 
   factory StatementModel.fromJson(Map<String, dynamic> json) =>
       _$StatementModelFromJson(json);
@@ -24,6 +26,8 @@ class StatementModel extends StatementEntity {
         amount: entity.amount,
         to: entity.to,
         description: entity.description,
-        tType: entity.tType);
+        tType: entity.tType,
+        bankName: entity.bankName,
+        from: entity.from);
   }
 }
