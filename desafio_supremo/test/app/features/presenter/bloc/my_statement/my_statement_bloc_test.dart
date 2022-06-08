@@ -4,7 +4,6 @@ import 'package:desafio_supremo/app/features/infra/models/statement_model/statem
 import 'package:desafio_supremo/app/features/presenter/bloc/my_statement/my_statement.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 class MyStatementBlocMock extends MockBloc<MyStatementEvents, MyStatementState>
     implements MyStatementBloc {}
