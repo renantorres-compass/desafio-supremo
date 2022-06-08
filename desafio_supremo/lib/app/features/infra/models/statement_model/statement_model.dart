@@ -16,4 +16,14 @@ class StatementModel extends StatementEntity {
   factory StatementModel.fromJson(Map<String, dynamic> json) =>
       _$StatementModelFromJson(json);
   Map<String, dynamic> toJson() => _$StatementModelToJson(this);
+
+  factory StatementModel.fromEntity(StatementEntity entity) {
+    return StatementModel(
+        createdAt: entity.createdAt,
+        id: entity.id,
+        amount: entity.amount,
+        to: entity.to,
+        description: entity.description,
+        tType: entity.tType);
+  }
 }
