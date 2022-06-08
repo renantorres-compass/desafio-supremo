@@ -16,8 +16,7 @@ class MyBalanceBloc extends Bloc<MyBalanceEvents, MyBalanceState> {
     final result = await usecase();
 
     return result.fold((l) => balanceModel, (BalanceEntity entity) {
-      balanceModel = entity;
-      return balanceModel;
+      return BalanceModel.fromEntity(entity);
     });
   }
 }

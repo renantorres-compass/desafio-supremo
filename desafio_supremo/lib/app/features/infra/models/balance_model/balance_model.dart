@@ -10,4 +10,8 @@ class BalanceModel extends BalanceEntity {
   factory BalanceModel.fromJson(Map<String, dynamic> json) =>
       _$BalanceModelFromJson(json);
   Map<String, dynamic> toJson() => _$BalanceModelToJson(this);
+
+  factory BalanceModel.fromEntity(BalanceEntity entity) {
+    return BalanceModel(amount: entity.amount);
+  }
 }
