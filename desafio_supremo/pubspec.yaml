@@ -35,6 +35,8 @@ dependencies:
   json_serializable: ^6.2.0
   dio: ^4.0.6
   retrofit: ^3.0.1+1
+  flutter_bloc: ^8.0.1
+  bloc: ^8.0.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -47,6 +49,7 @@ dev_dependencies:
   faker: ^2.0.0
   build_runner: ^2.1.11
   retrofit_generator: ^4.0.1
+  bloc_test: ^9.0.3
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

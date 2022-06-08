@@ -1,5 +1,4 @@
 import 'package:desafio_supremo/app/features/infra/models/statement_items_model/statement_items_model.dart';
-import 'package:desafio_supremo/app/features/infra/models/statement_model/statement_model.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 

@@ -16,6 +16,7 @@ class DetailStatementDioDatasource implements DetailStatementDatasource {
 
       return result;
     } on DioError catch (e) {
+      
       return null;
     }
   }
