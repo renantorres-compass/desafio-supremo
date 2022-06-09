@@ -1,5 +1,6 @@
 import 'package:desafio_supremo/app/core/ui/app_colors.dart';
 import 'package:desafio_supremo/app/core/utils/loading_status.dart';
+import 'package:desafio_supremo/app/core/utils/utils_functions.dart';
 import 'package:desafio_supremo/app/features/presenter/bloc/my_balance/my_balance_bloc.dart';
 import 'package:desafio_supremo/app/features/presenter/bloc/my_balance/my_balance_events.dart';
 import 'package:desafio_supremo/app/features/presenter/bloc/my_statement/my_statement_bloc.dart';
@@ -112,7 +113,9 @@ Widget _statementList(ThemeData appTheme, BuildContext context,
                     typeAmount: list[index].amount.toString(),
                     typeOrigin: list[index].from ?? list[index].to ?? "",
                     typeTitle: list[index].description ?? ""),
-                _dateWidget(appTheme, context, date: '09/06', isPix: true)
+                _dateWidget(appTheme, context,
+                    date: Utils.convertDateToDayMonth(list[index].createdAt),
+                    isPix: true)
               ],
             ),
           );
