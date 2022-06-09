@@ -21,7 +21,7 @@ class Utils {
     }
   }
 
-  static String convertMoneyValue(String? amount, String? tType) {
+  static String convertMoneyValueWithType(String? amount, String? tType) {
     bool isOut = false;
     if (tType != null) {
       if (tType.contains('OUT')) {
@@ -41,6 +41,19 @@ class Utils {
       return '${isOut ? "- " : ""}R\$ ${controller.text}';
     } else {
       return "${isOut ? "- " : ""} R\$ 0,00";
+    }
+  }
+
+  static String convertMoneyValue(String? amount) {
+    if (amount != null) {
+      var controller = MoneyMaskedTextController(
+          initialValue: double.parse(amount),
+          decimalSeparator: ',',
+          thousandSeparator: '');
+
+      return "R\$ ${controller.text}";
+    } else {
+      return "R\$ 0,00";
     }
   }
 }

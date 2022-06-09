@@ -4,6 +4,7 @@ import 'package:desafio_supremo/app/features/presenter/bloc/my_balance/my_balanc
 import 'package:desafio_supremo/app/features/presenter/bloc/my_balance/my_balance_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utils/utils.dart';
 import '../../../domain/entities/entities.dart';
 
 class MyBalanceBloc extends Bloc<MyBalanceEvents, MyBalanceState> {
@@ -14,11 +15,18 @@ class MyBalanceBloc extends Bloc<MyBalanceEvents, MyBalanceState> {
         emit(MyBalanceSuccessState(balance: await _getMyBalance())));
   }
 
+  var loadingStatus = LoadingStatus.loading;
+
   Future<BalanceModel> _getMyBalance() async {
+    loadingStatus = LoadingStatus.loading;
     BalanceModel balanceModel = BalanceModel(amount: 0);
     final result = await usecase();
 
-    return result.fold((l) => balanceModel, (BalanceEntity entity) {
+    return result.fold((l) {
+      loadingStatus = LoadingStatus.empty;
+      return balanceModel;
+    }, (BalanceEntity entity) {
+      loadingStatus = LoadingStatus.complete;
       return BalanceModel.fromEntity(entity);
     });
   }
