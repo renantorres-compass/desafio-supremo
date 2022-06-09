@@ -1,4 +1,6 @@
 import 'package:desafio_supremo/app/core/ui/app_colors.dart';
+import 'package:desafio_supremo/app/features/presenter/bloc/my_balance/my_balance_bloc.dart';
+import 'package:desafio_supremo/app/features/presenter/bloc/my_balance/my_balance_events.dart';
 import 'package:desafio_supremo/app/features/presenter/bloc/my_statement/my_statement_bloc.dart';
 import 'package:desafio_supremo/app/features/presenter/bloc/my_statement/my_statement_events.dart';
 import 'package:flutter/material.dart';
@@ -13,20 +15,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late MyStatementBloc bloc;
+  late MyStatementBloc myStatementBloc;
+  late MyBalanceBloc myBalanceBloc;
   bool? isPix;
 
   @override
   void initState() {
     super.initState();
 
-    bloc = MyStatementBloc(s1());
-    bloc.add(LoadMyStatementEvents());
+    myStatementBloc = MyStatementBloc(s1());
+    myStatementBloc.add(LoadMyStatementEvents());
+
+    myBalanceBloc = MyBalanceBloc(s1());
+    myBalanceBloc.add(LoadMyBalanceEvents());
   }
 
   @override
   void dispose() {
-    bloc.close();
+    myStatementBloc.close();
     super.dispose();
   }
 
