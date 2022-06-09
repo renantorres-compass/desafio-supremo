@@ -110,7 +110,7 @@ Widget _statementList(ThemeData appTheme, BuildContext context,
                 _customDivider(),
                 _customListTile(appTheme,
                     typeAmount: list[index].amount.toString(),
-                    typeOrigin: list[index].from ?? "",
+                    typeOrigin: list[index].from ?? list[index].to ?? "",
                     typeTitle: list[index].description ?? ""),
                 _dateWidget(appTheme, context, date: '09/06', isPix: true)
               ],
