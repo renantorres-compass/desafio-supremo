@@ -37,7 +37,7 @@ void main() {
     bloc.close();
   });
 
-  test('Emits My Balance Success State when succeed', () async {
+  test('Emits My Statement Success State when succeed', () async {
     whenListen(bloc, Stream<MyStatementState>.fromIterable(expectedSuccess),
         initialState: MyStatementInitialState());
 
@@ -56,7 +56,7 @@ void main() {
     bloc.close();
   });
 
-  test('Emits My Balance Error State when dont succeed', () async {
+  test('Emits My Statement Error State when dont succeed', () async {
     whenListen(bloc, Stream<MyStatementState>.fromIterable(expectedError),
         initialState: MyStatementInitialState());
 
