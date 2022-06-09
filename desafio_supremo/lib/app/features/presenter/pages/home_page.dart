@@ -111,7 +111,8 @@ Widget _statementList(ThemeData appTheme, BuildContext context,
               children: [
                 _customDivider(),
                 _customListTile(appTheme,
-                    typeAmount: list[index].amount.toString(),
+                    typeAmount: Utils.convertMoneyValue(
+                        list[index].amount.toString(), list[index].tType),
                     typeOrigin: list[index].from ?? list[index].to ?? "",
                     typeTitle: list[index].description ?? ""),
                 _dateWidget(appTheme, context,
@@ -202,7 +203,7 @@ Widget _customListTile(ThemeData appTheme,
           ),
           Flexible(
             child: Text(
-              'R\$ $typeAmount',
+              typeAmount,
               style: appTheme.textTheme.headline3,
             ),
           ),
