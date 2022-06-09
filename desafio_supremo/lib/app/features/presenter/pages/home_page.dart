@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
   late MyStatementBloc myStatementBloc;
   late MyBalanceBloc myBalanceBloc;
   bool? isPix;
+  late bool viewAmount;
 
   @override
   void initState() {
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
 
     myBalanceBloc = MyBalanceBloc(s1());
     myBalanceBloc.add(LoadMyBalanceEvents());
+    viewAmount = true;
   }
 
   @override
@@ -51,7 +53,7 @@ class _HomePageState extends State<HomePage> {
         child: Flex(
           direction: Axis.vertical,
           children: [
-            _amountWidget(appTheme),
+            _amountWidget(appTheme, viewAmount),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 21),
               alignment: AlignmentDirectional.topStart,
@@ -92,7 +94,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-Widget _amountWidget(ThemeData appTheme) {
+Widget _amountWidget(ThemeData appTheme, bool viewAmount) {
   return Flexible(
       child: Container(
     height: 91,
@@ -116,15 +118,24 @@ Widget _amountWidget(ThemeData appTheme) {
                   style: appTheme.textTheme.bodyText1,
                 ),
               ),
-              const Icon(
-                Icons.visibility,
-                color: AppColors.primaryColor,
-              )
+              GestureDetector(
+                  onTap: () {
+                    viewAmount = !viewAmount;
+                  },
+                  child: viewAmount
+                      ? const Icon(
+                          Icons.visibility,
+                          color: AppColors.primaryColor,
+                        )
+                      : const Icon(
+                          Icons.visibility_off,
+                          color: AppColors.primaryColor,
+                        ))
             ],
           )),
           Flexible(
             child: Text(
-              'R\$ 1.345,00',
+              viewAmount ? 'R\$ 1.345,00' : "___________",
               style: appTheme.textTheme.headline1,
             ),
           )
