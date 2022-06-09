@@ -1,13 +1,21 @@
 import 'package:desafio_supremo/app/core/ui/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+bool? isPix;
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final appTheme = Theme.of(context);
     final size = MediaQuery.of(context).size;
+    isPix = true;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Extrato'),
@@ -33,15 +41,20 @@ class HomePage extends StatelessWidget {
                   shrinkWrap: true,
                   children: [
                     Container(
-                      color: Colors.white,
+                      color:
+                          isPix! ? AppColors.primaryColorLight : Colors.white,
                       padding: const EdgeInsets.symmetric(horizontal: 17),
                       height: 89,
                       child: Flex(
                         direction: Axis.horizontal,
                         children: [
                           _customDivider(),
-                          _customListTile(appTheme),
-                          _dateWidget(appTheme, context)
+                          _customListTile(appTheme,
+                              typeAmount: '1234',
+                              typeOrigin: 'David Bond',
+                              typeTitle: 'Transferência realizada'),
+                          _dateWidget(appTheme, context,
+                              date: '09/06', isPix: true)
                         ],
                       ),
                     )
@@ -96,7 +109,10 @@ Widget _amountWidget(ThemeData appTheme) {
   ));
 }
 
-Widget _customListTile(ThemeData appTheme) {
+Widget _customListTile(ThemeData appTheme,
+    {required String typeTitle,
+    required String typeOrigin,
+    required String typeAmount}) {
   return Expanded(
     flex: 3,
     child: Container(
@@ -108,19 +124,19 @@ Widget _customListTile(ThemeData appTheme) {
         children: [
           Flexible(
             child: Text(
-              'Transferência enviada',
+              typeTitle,
               style: appTheme.textTheme.bodyText1,
             ),
           ),
           Flexible(
             child: Text(
-              'David Bond',
+              typeOrigin,
               style: appTheme.textTheme.subtitle1,
             ),
           ),
           Flexible(
             child: Text(
-              'R\$ 100,00',
+              'R\$ $typeAmount',
               style: appTheme.textTheme.headline3,
             ),
           ),
@@ -147,26 +163,32 @@ Widget _customDivider() {
   );
 }
 
-Widget _dateWidget(ThemeData appTheme, BuildContext context) {
+Widget _dateWidget(ThemeData appTheme, BuildContext context,
+    {required bool isPix, required String date}) {
   final size = MediaQuery.of(context).size;
   return Flexible(
       child: Container(
     padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 5),
-    child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Container(
-        color: AppColors.primaryColor,
-        height: 19,
-        width: size.width,
-        alignment: Alignment.center,
-        child: Text(
-          "Pix",
-          style: appTheme.textTheme.subtitle2,
-        ),
-      ),
-      Text(
-        "09/06",
-        style: appTheme.textTheme.subtitle1,
-      ),
-    ]),
+    child: isPix
+        ? Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Container(
+              color: AppColors.primaryColor,
+              height: 19,
+              width: size.width,
+              alignment: Alignment.center,
+              child: Text(
+                "Pix",
+                style: appTheme.textTheme.subtitle2,
+              ),
+            ),
+            Text(
+              date,
+              style: appTheme.textTheme.subtitle1,
+            ),
+          ])
+        : Text(
+            date,
+            style: appTheme.textTheme.subtitle1,
+          ),
   ));
 }

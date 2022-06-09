@@ -57,6 +57,7 @@ ThemeData appThemeData() {
   return ThemeData(
       primaryColor: primaryColor,
       appBarTheme: appBarTheme,
+      scaffoldBackgroundColor: Colors.white,
       useMaterial3: true,
       brightness: Brightness.light,
       primaryColorDark: primaryColorDark,
