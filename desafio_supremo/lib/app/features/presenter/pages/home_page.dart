@@ -1,5 +1,9 @@
 import 'package:desafio_supremo/app/core/ui/app_colors.dart';
+import 'package:desafio_supremo/app/features/presenter/bloc/my_statement/my_statement_bloc.dart';
+import 'package:desafio_supremo/app/features/presenter/bloc/my_statement/my_statement_events.dart';
 import 'package:flutter/material.dart';
+
+import '../../../core/utils/dependency_injection.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -8,9 +12,24 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-bool? isPix;
-
 class _HomePageState extends State<HomePage> {
+  late MyStatementBloc bloc;
+  bool? isPix;
+
+  @override
+  void initState() {
+    super.initState();
+
+    bloc = MyStatementBloc(s1());
+    bloc.add(LoadMyStatementEvents());
+  }
+
+  @override
+  void dispose() {
+    bloc.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final appTheme = Theme.of(context);
