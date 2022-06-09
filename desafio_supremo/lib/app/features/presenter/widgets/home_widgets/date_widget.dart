@@ -25,9 +25,17 @@ Widget dateWidget(ThemeData appTheme, BuildContext context,
               style: appTheme.textTheme.subtitle1,
             ),
           ])
-        : Text(
-            date,
-            style: appTheme.textTheme.subtitle1,
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: size.width,
+              ),
+              Text(
+                date,
+                style: appTheme.textTheme.subtitle1,
+              ),
+            ],
           ),
   ));
 }
