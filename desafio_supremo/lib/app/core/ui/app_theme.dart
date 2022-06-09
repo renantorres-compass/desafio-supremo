@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 ThemeData appThemeData() {
   const primaryColor = Color(0xFF00C1AF);
@@ -40,8 +41,19 @@ ThemeData appThemeData() {
     ),
   ));
 
+  final appBarTheme = AppBarTheme(
+      color: Colors.white,
+      titleTextStyle: textTheme.headline2,
+      centerTitle: true,
+      elevation: 0,
+      systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.white,
+          statusBarBrightness: Brightness.dark,
+          statusBarIconBrightness: Brightness.dark));
+
   return ThemeData(
       primaryColor: primaryColor,
+      appBarTheme: appBarTheme,
       useMaterial3: true,
       brightness: Brightness.light,
       primaryColorDark: primaryColorDark,
