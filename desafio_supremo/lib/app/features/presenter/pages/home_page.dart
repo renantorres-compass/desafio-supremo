@@ -3,7 +3,9 @@ import 'package:desafio_supremo/app/features/presenter/bloc/my_balance/my_balanc
 import 'package:desafio_supremo/app/features/presenter/bloc/my_balance/my_balance_events.dart';
 import 'package:desafio_supremo/app/features/presenter/bloc/my_statement/my_statement_bloc.dart';
 import 'package:desafio_supremo/app/features/presenter/bloc/my_statement/my_statement_events.dart';
+import 'package:desafio_supremo/app/features/presenter/bloc/my_statement/my_statement_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/utils/dependency_injection.dart';
 
@@ -62,36 +64,41 @@ class _HomePageState extends State<HomePage> {
                 style: appTheme.textTheme.headline3,
               ),
             ),
-            Expanded(
-                flex: 3,
-                child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    Container(
-                      color:
-                          isPix! ? AppColors.primaryColorLight : Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 17),
-                      height: 89,
-                      child: Flex(
-                        direction: Axis.horizontal,
-                        children: [
-                          _customDivider(),
-                          _customListTile(appTheme,
-                              typeAmount: '1234',
-                              typeOrigin: 'David Bond',
-                              typeTitle: 'Transferência realizada'),
-                          _dateWidget(appTheme, context,
-                              date: '09/06', isPix: true)
-                        ],
-                      ),
-                    )
-                  ],
-                ))
+            BlocBuilder<MyStatementBloc, MyStatementState>(
+                bloc: myStatementBloc, builder: (context, state) {}),
+            _statementList(appTheme, context, isPix: true)
           ],
         ),
       ),
     );
   }
+}
+
+Widget _statementList(ThemeData appTheme, BuildContext context,
+    {required bool isPix}) {
+  return Expanded(
+      flex: 3,
+      child: ListView(
+        shrinkWrap: true,
+        children: [
+          Container(
+            color: isPix ? AppColors.primaryColorLight : Colors.white,
+            padding: const EdgeInsets.symmetric(horizontal: 17),
+            height: 89,
+            child: Flex(
+              direction: Axis.horizontal,
+              children: [
+                _customDivider(),
+                _customListTile(appTheme,
+                    typeAmount: '1234',
+                    typeOrigin: 'David Bond',
+                    typeTitle: 'Transferência realizada'),
+                _dateWidget(appTheme, context, date: '09/06', isPix: true)
+              ],
+            ),
+          )
+        ],
+      ));
 }
 
 Widget _amountWidget(ThemeData appTheme, bool viewAmount) {
