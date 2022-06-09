@@ -1,3 +1,4 @@
+import 'package:desafio_supremo/app/core/utils/loading_status.dart';
 import 'package:desafio_supremo/app/features/domain/usecases/my_statement_usecase.dart';
 import 'package:desafio_supremo/app/features/infra/models/statement_model/statement_model.dart';
 import 'package:desafio_supremo/app/features/presenter/bloc/my_statement/my_statement.dart';
@@ -14,14 +15,21 @@ class MyStatementBloc extends Bloc<MyStatementEvents, MyStatementState> {
         MyStatementSuccessState(statementItems: await getMyStatementsList())));
   }
 
+  var loadingStatus = LoadingStatus.loading;
+
   Future<StatementItemsModel> getMyStatementsList() async {
+    loadingStatus = LoadingStatus.loading;
     var statementItems = StatementItemsModel(items: []);
     final result = await usecase();
 
-    return result.fold((l) => statementItems, (StatementItemsEntity entity) {
+    return result.fold((l) {
+      loadingStatus = LoadingStatus.empty;
+      return statementItems;
+    }, (StatementItemsEntity entity) {
       for (var element in entity.items) {
         statementItems.items.add(StatementModel.fromEntity(element));
       }
+      loadingStatus = LoadingStatus.complete;
       return statementItems;
     });
   }

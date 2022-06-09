@@ -1,4 +1,5 @@
 import 'package:desafio_supremo/app/core/ui/app_colors.dart';
+import 'package:desafio_supremo/app/core/utils/loading_status.dart';
 import 'package:desafio_supremo/app/features/presenter/bloc/my_balance/my_balance_bloc.dart';
 import 'package:desafio_supremo/app/features/presenter/bloc/my_balance/my_balance_events.dart';
 import 'package:desafio_supremo/app/features/presenter/bloc/my_statement/my_statement_bloc.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/utils/dependency_injection.dart';
+import '../../infra/models/statement_model/statement_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -65,8 +67,24 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             BlocBuilder<MyStatementBloc, MyStatementState>(
-                bloc: myStatementBloc, builder: (context, state) {}),
-            _statementList(appTheme, context, isPix: true)
+                bloc: myStatementBloc,
+                builder: (context, state) {
+                  switch (myStatementBloc.loadingStatus) {
+                    case LoadingStatus.loading:
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.primaryColor,
+                        ),
+                      );
+                    case LoadingStatus.complete:
+                    default:
+                      List<StatementModel> list =
+                          state.statementItems?.items ?? [];
+
+                      return _statementList(appTheme, context,
+                          isPix: true, list: list);
+                  }
+                }),
           ],
         ),
       ),
@@ -75,13 +93,14 @@ class _HomePageState extends State<HomePage> {
 }
 
 Widget _statementList(ThemeData appTheme, BuildContext context,
-    {required bool isPix}) {
+    {required bool isPix, required List<StatementModel> list}) {
   return Expanded(
       flex: 3,
-      child: ListView(
+      child: ListView.builder(
         shrinkWrap: true,
-        children: [
-          Container(
+        itemCount: list.length,
+        itemBuilder: (context, index) {
+          return Container(
             color: isPix ? AppColors.primaryColorLight : Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 17),
             height: 89,
@@ -90,14 +109,14 @@ Widget _statementList(ThemeData appTheme, BuildContext context,
               children: [
                 _customDivider(),
                 _customListTile(appTheme,
-                    typeAmount: '1234',
-                    typeOrigin: 'David Bond',
-                    typeTitle: 'Transferência realizada'),
+                    typeAmount: list[index].amount.toString(),
+                    typeOrigin: list[index].from ?? "",
+                    typeTitle: list[index].description ?? ""),
                 _dateWidget(appTheme, context, date: '09/06', isPix: true)
               ],
             ),
-          )
-        ],
+          );
+        },
       ));
 }
 
