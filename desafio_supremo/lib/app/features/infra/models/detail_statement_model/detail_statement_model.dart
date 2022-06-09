@@ -17,4 +17,15 @@ class DetailStatementModel extends DetailStatementEntity {
   factory DetailStatementModel.fromJson(Map<String, dynamic> json) =>
       _$DetailStatementModelFromJson(json);
   Map<String, dynamic> toJson() => _$DetailStatementModelToJson(this);
+
+  factory DetailStatementModel.fromEntity(DetailStatementEntity entity) {
+    return DetailStatementModel(
+        amount: entity.amount,
+        id: entity.id,
+        authentication: entity.authentication,
+        tType: entity.tType,
+        createdAt: entity.createdAt,
+        to: entity.to,
+        description: entity.description);
+  }
 }

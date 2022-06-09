@@ -8,7 +8,8 @@ abstract class DetailStatementState extends Equatable {
 }
 
 class DetailStatementInitialState extends DetailStatementState {
-  const DetailStatementInitialState({required super.detailStatement});
+  DetailStatementInitialState()
+      : super(detailStatement: DetailStatementModel());
 
   @override
   List<Object?> get props => [];

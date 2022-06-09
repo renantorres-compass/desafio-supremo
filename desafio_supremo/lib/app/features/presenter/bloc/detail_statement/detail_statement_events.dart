@@ -1,3 +1,3 @@
-import 'package:equatable/equatable.dart';
+abstract class DetailStatemenEvents {}
 
-abstract class DetailStatemenEvents extends Equatable {}
+class LoadDetailStatementsEvents extends DetailStatemenEvents {}

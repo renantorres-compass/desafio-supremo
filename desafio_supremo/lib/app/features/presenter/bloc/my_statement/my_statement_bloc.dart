@@ -15,7 +15,7 @@ class MyStatementBloc extends Bloc<MyStatementEvents, MyStatementState> {
   }
 
   Future<StatementItemsModel> getMyStatementsList() async {
-    final statementItems = StatementItemsModel(items: []);
+    var statementItems = StatementItemsModel(items: []);
     final result = await usecase();
 
     return result.fold((l) => statementItems, (StatementItemsEntity entity) {
