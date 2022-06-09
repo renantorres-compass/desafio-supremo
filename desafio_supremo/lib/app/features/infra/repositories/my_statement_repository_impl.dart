@@ -13,8 +13,9 @@ class MyStatementRepositoryImpl extends MyStatementRepository {
       getMyStatementsList() async {
     try {
       final result = await datasource.getMyStatementsList();
-      return result != null ? Right(result) : Left(NullError());
+      return Right(result);
     } catch (e) {
+      print(e.toString());
       return Left(DatasourceError());
     }
   }

@@ -3,7 +3,7 @@ abstract class Api {
 
   static const String myBalanceEndpoint = "myBalance";
 
-  static const String myStatementEndpoint = "/myStatement/100/0";
+  static const String myStatementEndpoint = "myStatement/100/0";
 
-  static const String detailStatementEndpoint = "/myStatement/detail";
+  static const String detailStatementEndpoint = "myStatement/detail";
 }

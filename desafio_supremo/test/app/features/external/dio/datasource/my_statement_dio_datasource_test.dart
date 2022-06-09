@@ -23,6 +23,7 @@ void main() {
   ];
 
   final items = StatementItemsModel(items: list);
+  final itemsEmpty = StatementItemsModel(items: []);
 
   test('Should return a items list with Statement Model', () async {
     when(() => service.getMyStatement(Auth.tokenValue))
@@ -31,14 +32,6 @@ void main() {
     final result = await datasource.getMyStatementsList();
 
     expect(result, items);
-    verify(() => service.getMyStatement(Auth.tokenValue)).called(1);
-  });
-
-  test('Should return a null value if receives null', () async {
-    when(() => service.getMyStatement(Auth.tokenValue))
-        .thenAnswer((_) async => null);
-    final result = await datasource.getMyStatementsList();
-    expect(result, null);
     verify(() => service.getMyStatement(Auth.tokenValue)).called(1);
   });
 }

@@ -10,13 +10,13 @@ class MyStatementDioDatasource implements MyStatementDatasource {
 
   MyStatementDioDatasource(this.service);
   @override
-  Future<StatementItemsModel?> getMyStatementsList() async {
+  Future<StatementItemsModel> getMyStatementsList() async {
     try {
       final result = await service.getMyStatement(Auth.tokenValue);
 
       return result;
     } on DioError catch (e) {
-      return null;
+      return StatementItemsModel(items: []);
     }
   }
 }

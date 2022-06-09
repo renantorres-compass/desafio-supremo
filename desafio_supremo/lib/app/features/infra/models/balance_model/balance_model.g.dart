@@ -7,7 +7,7 @@ part of 'balance_model.dart';
 // **************************************************************************
 
 BalanceModel _$BalanceModelFromJson(Map<String, dynamic> json) => BalanceModel(
-      amount: json['amount'] as num,
+      amount: json['amount'] as num?,
     );
 
 Map<String, dynamic> _$BalanceModelToJson(BalanceModel instance) =>

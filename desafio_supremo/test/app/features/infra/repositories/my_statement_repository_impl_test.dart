@@ -33,15 +33,6 @@ void main() {
     verify(() => datasource.getMyStatementsList()).called(1);
   });
 
-  test('Should throw a Null Error if return a null value', () async {
-    when(() => datasource.getMyStatementsList()).thenAnswer((_) async => null);
-
-    final result = await repository.getMyStatementsList();
-
-    expect(result, Left(NullError()));
-    verify(() => datasource.getMyStatementsList()).called(1);
-  });
-
   test('Should throw a Datasource Error if dont succeed', () async {
     when(() => datasource.getMyStatementsList())
         .thenThrow((_) async => DatasourceError());

@@ -9,13 +9,13 @@ part of 'detail_statement_model.dart';
 DetailStatementModel _$DetailStatementModelFromJson(
         Map<String, dynamic> json) =>
     DetailStatementModel(
-      amount: json['amount'] as num,
-      id: json['id'] as String,
-      authentication: json['authentication'] as String,
-      tType: json['tType'] as String,
-      createdAt: json['createdAt'] as String,
-      to: json['to'] as String,
-      description: json['description'] as String,
+      amount: json['amount'] as num?,
+      id: json['id'] as String?,
+      authentication: json['authentication'] as String?,
+      tType: json['tType'] as String?,
+      createdAt: json['createdAt'] as String?,
+      to: json['to'] as String?,
+      description: json['description'] as String?,
     );
 
 Map<String, dynamic> _$DetailStatementModelToJson(

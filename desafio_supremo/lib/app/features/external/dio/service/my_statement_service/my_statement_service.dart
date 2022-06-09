@@ -10,8 +10,8 @@ part 'my_statement_service.g.dart';
 abstract class MyStatementService {
   factory MyStatementService(Dio dio, {String baseUrl}) = _MyStatementService;
 
-  @GET(Api.myBalanceEndpoint)
-  Future<StatementItemsModel?> getMyStatement(
+  @GET(Api.myStatementEndpoint)
+  Future<StatementItemsModel> getMyStatement(
     @Header(Auth.tokenHeader) String token,
   );
 }

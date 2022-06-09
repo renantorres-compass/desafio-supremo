@@ -18,21 +18,19 @@ class _MyStatementService implements MyStatementService {
   String? baseUrl;
 
   @override
-  Future<StatementItemsModel?> getMyStatement(token) async {
+  Future<StatementItemsModel> getMyStatement(token) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'token': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>?>(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<StatementItemsModel>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, 'myBalance',
+                .compose(_dio.options, 'myStatement/100/0',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data == null
-        ? null
-        : StatementItemsModel.fromJson(_result.data!);
+    final value = StatementItemsModel.fromJson(_result.data!);
     return value;
   }
 
