@@ -7,30 +7,48 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = Theme.of(context);
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Extrato'),
       ),
-      body: Flex(
-        direction: Axis.vertical,
-        children: [
-          _amountWidget(appTheme),
-          Flexible(
-              child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 21),
-            alignment: AlignmentDirectional.topStart,
-            child: Text(
-              'Suas movimentações',
-              style: appTheme.textTheme.headline3,
+      body: SizedBox(
+        height: size.height,
+        width: size.width,
+        child: Flex(
+          direction: Axis.vertical,
+          children: [
+            _amountWidget(appTheme),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 21),
+              alignment: AlignmentDirectional.topStart,
+              child: Text(
+                'Suas movimentações',
+                style: appTheme.textTheme.headline3,
+              ),
             ),
-          )),
-          Expanded(
-              child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 17,
-            ),
-          ))
-        ],
+            Expanded(
+                flex: 3,
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    Container(
+                      color: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 17),
+                      height: 89,
+                      child: Flex(
+                        direction: Axis.horizontal,
+                        children: [
+                          _customDivider(),
+                          _customListTile(appTheme),
+                          Flexible(child: Container())
+                        ],
+                      ),
+                    )
+                  ],
+                ))
+          ],
+        ),
       ),
     );
   }
@@ -76,4 +94,55 @@ Widget _amountWidget(ThemeData appTheme) {
       ),
     ),
   ));
+}
+
+Widget _customListTile(ThemeData appTheme) {
+  return Flexible(
+    flex: 2,
+    child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 5),
+      child: Flex(
+        direction: Axis.vertical,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Flexible(
+            child: Text(
+              'Transferência enviada',
+              style: appTheme.textTheme.bodyText1,
+            ),
+          ),
+          Flexible(
+            child: Text(
+              'David Bond',
+              style: appTheme.textTheme.subtitle1,
+            ),
+          ),
+          Flexible(
+            child: Text(
+              'R\$ 100,00',
+              style: appTheme.textTheme.headline3,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget _customDivider() {
+  return Stack(
+    alignment: Alignment.center,
+    children: const [
+      VerticalDivider(
+        thickness: 1,
+        color: AppColors.primaryColor,
+      ),
+      Icon(
+        Icons.circle,
+        size: 11,
+        color: AppColors.primaryColor,
+      )
+    ],
+  );
 }

@@ -27,9 +27,7 @@ ThemeData appThemeData() {
       fontSize: 14,
     ),
     subtitle1: const TextStyle(
-      color: primaryColor,
-      fontSize: 12,
-    ),
+        color: primaryColorDark, fontSize: 14, fontWeight: FontWeight.w500),
     subtitle2: const TextStyle(
       color: Colors.white,
       fontSize: 10,
