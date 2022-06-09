@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
                         children: [
                           _customDivider(),
                           _customListTile(appTheme),
-                          Flexible(child: Container())
+                          _dateWidget(appTheme, context)
                         ],
                       ),
                     )
@@ -97,8 +97,8 @@ Widget _amountWidget(ThemeData appTheme) {
 }
 
 Widget _customListTile(ThemeData appTheme) {
-  return Flexible(
-    flex: 2,
+  return Expanded(
+    flex: 3,
     child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 5),
       child: Flex(
@@ -145,4 +145,28 @@ Widget _customDivider() {
       )
     ],
   );
+}
+
+Widget _dateWidget(ThemeData appTheme, BuildContext context) {
+  final size = MediaQuery.of(context).size;
+  return Flexible(
+      child: Container(
+    padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 5),
+    child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      Container(
+        color: AppColors.primaryColor,
+        height: 19,
+        width: size.width,
+        alignment: Alignment.center,
+        child: Text(
+          "Pix",
+          style: appTheme.textTheme.subtitle2,
+        ),
+      ),
+      Text(
+        "09/06",
+        style: appTheme.textTheme.subtitle1,
+      ),
+    ]),
+  ));
 }
