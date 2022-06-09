@@ -6,4 +6,16 @@ class Utils {
       return "";
     }
   }
+
+  static bool convertToIsPix(String? tType) {
+    if (tType != null) {
+      if (tType.contains('PIX')) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
 }

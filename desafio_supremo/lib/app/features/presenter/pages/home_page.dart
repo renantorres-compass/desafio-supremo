@@ -82,8 +82,7 @@ class _HomePageState extends State<HomePage> {
                       List<StatementModel> list =
                           state.statementItems?.items ?? [];
 
-                      return _statementList(appTheme, context,
-                          isPix: true, list: list);
+                      return _statementList(appTheme, context, list: list);
                   }
                 }),
           ],
@@ -94,7 +93,7 @@ class _HomePageState extends State<HomePage> {
 }
 
 Widget _statementList(ThemeData appTheme, BuildContext context,
-    {required bool isPix, required List<StatementModel> list}) {
+    {required List<StatementModel> list}) {
   return Expanded(
       flex: 3,
       child: ListView.builder(
@@ -102,7 +101,9 @@ Widget _statementList(ThemeData appTheme, BuildContext context,
         itemCount: list.length,
         itemBuilder: (context, index) {
           return Container(
-            color: isPix ? AppColors.primaryColorLight : Colors.white,
+            color: Utils.convertToIsPix(list[index].tType)
+                ? AppColors.primaryColorLight
+                : Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 17),
             height: 89,
             child: Flex(
@@ -115,7 +116,7 @@ Widget _statementList(ThemeData appTheme, BuildContext context,
                     typeTitle: list[index].description ?? ""),
                 _dateWidget(appTheme, context,
                     date: Utils.convertDateToDayMonth(list[index].createdAt),
-                    isPix: true)
+                    isPix: Utils.convertToIsPix(list[index].tType))
               ],
             ),
           );
