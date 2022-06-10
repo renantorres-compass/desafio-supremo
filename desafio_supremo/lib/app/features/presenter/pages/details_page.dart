@@ -91,7 +91,28 @@ class _DetailsPageState extends State<DetailsPage> {
                       return customDetailsList(
                           appTheme, state.detailStatement, context);
                   }
-                })
+                }),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 30),
+              child: Container(
+                width: size.width,
+                height: 48,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 17,
+                ),
+                child: TextButton(
+                    style: TextButton.styleFrom(
+                        primary: AppColors.primaryColorLight,
+                        backgroundColor: AppColors.primaryColor,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero)),
+                    onPressed: () {},
+                    child: Text(
+                      'Compartilhar',
+                      style: appTheme.textTheme.subtitle2,
+                    )),
+              ),
+            )
           ],
         ),
       ),

@@ -9,8 +9,12 @@ ThemeData appThemeData() {
 
   final textTheme = TextTheme(
     headline1: const TextStyle(
-        color: primaryColor, fontSize: 24, fontWeight: FontWeight.bold),
+        letterSpacing: 0,
+        color: primaryColor,
+        fontSize: 24,
+        fontWeight: FontWeight.bold),
     headline2: TextStyle(
+        letterSpacing: 0,
         color: textColor,
         fontSize: 14,
         fontWeight: FontWeight.bold,
@@ -21,28 +25,27 @@ ThemeData appThemeData() {
               color: Colors.black.withOpacity(0.25))
         ]),
     headline3: const TextStyle(
-        color: textColor, fontSize: 14, fontWeight: FontWeight.w700),
+        letterSpacing: 0,
+        color: textColor,
+        fontSize: 14,
+        fontWeight: FontWeight.w700),
     bodyText1: const TextStyle(
+      letterSpacing: 0,
       color: textColor,
       fontSize: 14,
     ),
     subtitle1: const TextStyle(
-        color: primaryColorDark, fontSize: 14, fontWeight: FontWeight.w500),
+        letterSpacing: 0,
+        color: primaryColorDark,
+        fontSize: 14,
+        fontWeight: FontWeight.w500),
     subtitle2: const TextStyle(
+      letterSpacing: 0,
       color: Colors.white,
-      fontSize: 10,
+      fontWeight: FontWeight.w700,
+      fontSize: 14,
     ),
   );
-
-  final textButtonData = TextButtonThemeData(
-      style: TextButton.styleFrom(
-    primary: primaryColor,
-    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-    textStyle: const TextStyle(
-      color: Colors.white,
-      fontSize: 12,
-    ),
-  ));
 
   final appBarTheme = AppBarTheme(
       color: Colors.white,
@@ -62,7 +65,6 @@ ThemeData appThemeData() {
       brightness: Brightness.light,
       primaryColorDark: primaryColorDark,
       primaryColorLight: primaryColorLight,
-      textButtonTheme: textButtonData,
       backgroundColor: Colors.white,
       textTheme: textTheme);
 }
