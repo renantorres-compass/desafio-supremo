@@ -83,7 +83,8 @@ class _DetailsPageState extends State<DetailsPage> {
               shareDetailsButton(
                   appTheme: appTheme,
                   context: context,
-                  screenshotController: screenshotController)
+                  screenshotController: screenshotController,
+                  detailStatementBloc: detailStatementBloc)
             ],
           ),
         ),
