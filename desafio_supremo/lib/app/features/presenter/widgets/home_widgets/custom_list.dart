@@ -1,9 +1,9 @@
-import 'package:desafio_supremo/app/features/presenter/widgets/home_widgets/home_widgets.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/ui/ui.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../infra/models/statement_model/statement_model.dart';
+import './home_widgets.dart';
 
 Widget customList(ThemeData appTheme, BuildContext context,
     {required List<StatementModel> list}) {

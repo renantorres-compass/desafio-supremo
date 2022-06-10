@@ -1,10 +1,9 @@
 import 'package:desafio_supremo/app/features/presenter/bloc/my_balance/my_balance.dart';
 
-import 'package:desafio_supremo/app/features/presenter/bloc/my_statement/my_statement_bloc.dart';
-import 'package:desafio_supremo/app/features/presenter/bloc/my_statement/my_statement_events.dart';
-import 'package:desafio_supremo/app/features/presenter/bloc/view_amount_bloc/view_amount_bloc.dart';
-import 'package:desafio_supremo/app/features/presenter/bloc/view_amount_bloc/view_amount_events.dart';
 import 'package:flutter/material.dart';
+
+import '../../../features/presenter/bloc/my_statement/my_statement.dart';
+import '../../../features/presenter/bloc/view_amount_bloc/view_amount.dart';
 import '../../../core/utils/dependency_injection.dart';
 import '../widgets/home_widgets/home_widgets.dart';
 

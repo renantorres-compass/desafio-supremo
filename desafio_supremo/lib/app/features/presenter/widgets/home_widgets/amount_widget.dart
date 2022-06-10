@@ -1,10 +1,8 @@
-import 'package:desafio_supremo/app/features/presenter/bloc/view_amount_bloc/view_amount_bloc.dart';
-import 'package:desafio_supremo/app/features/presenter/bloc/view_amount_bloc/view_amount_events.dart';
-import 'package:desafio_supremo/app/features/presenter/bloc/view_amount_bloc/view_amount_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/ui/ui.dart';
+import '../../bloc/view_amount_bloc/view_amount.dart';
 
 Widget amountWidget(
     ThemeData appTheme, String amount, ViewAmountBloc viewAmountBloc) {

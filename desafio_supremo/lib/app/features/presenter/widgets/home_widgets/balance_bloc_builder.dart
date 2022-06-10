@@ -1,11 +1,12 @@
-import 'package:desafio_supremo/app/features/presenter/bloc/view_amount_bloc/view_amount_bloc.dart';
-import 'package:desafio_supremo/app/features/presenter/widgets/home_widgets/home_widgets.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/ui/ui.dart';
 import '../../../../core/utils/utils.dart';
 import '../../bloc/my_balance/my_balance.dart';
+import '../../bloc/view_amount_bloc/view_amount.dart';
+import './home_widgets.dart';
 
 Widget balanceBlocBuilder(
     {required MyBalanceBloc myBalanceBloc,
