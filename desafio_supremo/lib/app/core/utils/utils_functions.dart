@@ -51,7 +51,7 @@ class Utils {
       var controller = MoneyMaskedTextController(
           initialValue: double.parse(amount),
           decimalSeparator: ',',
-          thousandSeparator: '');
+          thousandSeparator: '.');
 
       return "R\$ ${controller.text}";
     } else {
