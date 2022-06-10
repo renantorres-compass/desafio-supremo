@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
 import 'package:path_provider/path_provider.dart';
@@ -87,8 +88,12 @@ class Utils {
   }
 
   static Future<void> captureImgAndShare(
-      ScreenshotController screenshotController) async {
-    await screenshotController.capture().then((imageFile) async {
+      ScreenshotController screenshotController, BuildContext context) async {
+    double pixelRatio = MediaQuery.of(context).devicePixelRatio;
+
+    await screenshotController
+        .capture(pixelRatio: pixelRatio)
+        .then((imageFile) async {
       if (imageFile != null) {
         final directory = await getApplicationDocumentsDirectory();
         final imagePath = await File('${directory.path}/image.png').create();

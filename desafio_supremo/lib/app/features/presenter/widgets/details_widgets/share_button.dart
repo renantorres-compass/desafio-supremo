@@ -37,7 +37,8 @@ Widget shareDetailsButton({
                         shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.zero)),
                     onPressed: () async {
-                      await Utils.captureImgAndShare(screenshotController);
+                      await Utils.captureImgAndShare(
+                          screenshotController, context);
                     },
                     child: Text(
                       'Compartilhar',

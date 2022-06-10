@@ -17,19 +17,19 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   late DetailStatementBloc detailStatementBloc;
-  late ScreenshotController screenshotController;
+  late ScreenshotController screenshotController = ScreenshotController();
 
   @override
   void initState() {
     super.initState();
     detailStatementBloc = DetailStatementBloc(s1());
     detailStatementBloc.add(LoadDetailStatementsEvents(id: widget.id ?? ""));
-    screenshotController = ScreenshotController();
   }
 
   @override
   void dispose() {
     detailStatementBloc.close();
+
     super.dispose();
   }
 
@@ -52,9 +52,10 @@ class _DetailsPageState extends State<DetailsPage> {
       ),
       body: Screenshot(
         controller: screenshotController,
-        child: SizedBox(
+        child: Container(
           height: size.height,
           width: size.width,
+          decoration: const BoxDecoration(color: Colors.white),
           child: Flex(
             direction: Axis.vertical,
             children: [
