@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.desafio_supremo">
+
+  
    <application
         android:label="desafio_supremo"
         android:name="${applicationName}"

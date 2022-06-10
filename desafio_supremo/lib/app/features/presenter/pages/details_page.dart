@@ -1,5 +1,6 @@
 import 'package:desafio_supremo/app/features/presenter/bloc/detail_statement/detail_statement.dart';
 import 'package:flutter/material.dart';
+import 'package:screenshot/screenshot.dart';
 
 import '../../../core/ui/ui.dart';
 import '../../../core/utils/utils.dart';
@@ -16,12 +17,14 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   late DetailStatementBloc detailStatementBloc;
+  late ScreenshotController screenshotController;
 
   @override
   void initState() {
     super.initState();
     detailStatementBloc = DetailStatementBloc(s1());
     detailStatementBloc.add(LoadDetailStatementsEvents(id: widget.id ?? ""));
+    screenshotController = ScreenshotController();
   }
 
   @override
@@ -47,38 +50,42 @@ class _DetailsPageState extends State<DetailsPage> {
           ),
         ),
       ),
-      body: SizedBox(
-        height: size.height,
-        width: size.width,
-        child: Flex(
-          direction: Axis.vertical,
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 21),
-              alignment: AlignmentDirectional.topStart,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Comprovante',
-                    style: appTheme.textTheme.headline3,
-                  ),
-                  const Divider(
-                    thickness: 0.5,
-                    color: AppColors.textColor,
-                  )
-                ],
+      body: Screenshot(
+        controller: screenshotController,
+        child: SizedBox(
+          height: size.height,
+          width: size.width,
+          child: Flex(
+            direction: Axis.vertical,
+            children: [
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 17, vertical: 21),
+                alignment: AlignmentDirectional.topStart,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Comprovante',
+                      style: appTheme.textTheme.headline3,
+                    ),
+                    const Divider(
+                      thickness: 0.5,
+                      color: AppColors.textColor,
+                    )
+                  ],
+                ),
               ),
-            ),
-            detailsBlocBuilder(
-                appTheme: appTheme,
-                context: context,
-                detailStatementBloc: detailStatementBloc),
-            shareDetailsButton(
-              appTheme: appTheme,
-              context: context,
-            )
-          ],
+              detailsBlocBuilder(
+                  appTheme: appTheme,
+                  context: context,
+                  detailStatementBloc: detailStatementBloc),
+              shareDetailsButton(
+                  appTheme: appTheme,
+                  context: context,
+                  screenshotController: screenshotController)
+            ],
+          ),
         ),
       ),
     );

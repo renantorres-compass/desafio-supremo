@@ -1,4 +1,9 @@
+import 'dart:io';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+
+import 'package:path_provider/path_provider.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../features/infra/models/detail_statement_model/detail_statement_model.dart';
 
@@ -79,5 +84,17 @@ class Utils {
       convertDateHour(value.createdAt),
       value.authentication ?? ""
     ];
+  }
+
+  static Future<void> captureImgAndShare(
+      ScreenshotController screenshotController) async {
+    await screenshotController.capture().then((imageFile) async {
+      if (imageFile != null) {
+        final directory = await getApplicationDocumentsDirectory();
+        final imagePath = await File('${directory.path}/image.png').create();
+        await imagePath.writeAsBytes(imageFile);
+        await Share.shareFiles([imagePath.path]);
+      }
+    });
   }
 }
