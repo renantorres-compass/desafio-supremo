@@ -21,6 +21,8 @@ void main() {
     const DetailStatementErrorState()
   ];
 
+  const id = "testeID";
+
   test('Initial state is correct', () async {
     whenListen(
         bloc,
@@ -36,7 +38,7 @@ void main() {
         initialState: DetailStatementInitialState());
 
     expect(bloc.state, equals(DetailStatementInitialState()));
-    bloc.add(LoadDetailStatementsEvents());
+    bloc.add(LoadDetailStatementsEvents(id: id));
     expectLater(
         bloc.stream,
         emitsInOrder(
@@ -55,7 +57,7 @@ void main() {
         initialState: DetailStatementInitialState());
 
     expect(bloc.state, equals(DetailStatementInitialState()));
-    bloc.add(LoadDetailStatementsEvents());
+    bloc.add(LoadDetailStatementsEvents(id: id));
     expectLater(
         bloc.stream,
         emitsInOrder(
