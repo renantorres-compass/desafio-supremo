@@ -1,3 +1,4 @@
+import 'package:dartz/dartz_streaming.dart';
 import 'package:desafio_supremo/app/features/domain/entities/detail_statement.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -12,7 +13,9 @@ class DetailStatementModel extends DetailStatementEntity {
       super.tType,
       super.createdAt,
       super.to,
-      super.description});
+      super.description,
+      super.bankName,
+      super.from});
 
   factory DetailStatementModel.fromJson(Map<String, dynamic> json) =>
       _$DetailStatementModelFromJson(json);
@@ -26,6 +29,8 @@ class DetailStatementModel extends DetailStatementEntity {
         tType: entity.tType,
         createdAt: entity.createdAt,
         to: entity.to,
-        description: entity.description);
+        description: entity.description,
+        bankName: entity.bankName,
+        from: entity.from);
   }
 }

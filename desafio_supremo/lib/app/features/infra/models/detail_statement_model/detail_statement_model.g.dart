@@ -16,6 +16,8 @@ DetailStatementModel _$DetailStatementModelFromJson(
       createdAt: json['createdAt'] as String?,
       to: json['to'] as String?,
       description: json['description'] as String?,
+      bankName: json['bankName'] as String?,
+      from: json['from'] as String?,
     );
 
 Map<String, dynamic> _$DetailStatementModelToJson(
@@ -28,4 +30,6 @@ Map<String, dynamic> _$DetailStatementModelToJson(
       'createdAt': instance.createdAt,
       'to': instance.to,
       'description': instance.description,
+      'from': instance.from,
+      'bankName': instance.bankName,
     };

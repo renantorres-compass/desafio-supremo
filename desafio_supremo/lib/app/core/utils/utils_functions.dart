@@ -1,5 +1,7 @@
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
+import '../../features/infra/models/detail_statement_model/detail_statement_model.dart';
+
 class Utils {
   static String convertDateToDayMonth(String? date) {
     if (date != null) {

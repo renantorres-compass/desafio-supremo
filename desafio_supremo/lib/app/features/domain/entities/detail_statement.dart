@@ -6,6 +6,8 @@ abstract class DetailStatementEntity {
   final String? createdAt;
   final String? to;
   final String? description;
+  final String? from;
+  final String? bankName;
 
   DetailStatementEntity({
     this.amount,
@@ -15,5 +17,7 @@ abstract class DetailStatementEntity {
     this.createdAt,
     this.to,
     this.description,
+    this.from,
+    this.bankName,
   });
 }
