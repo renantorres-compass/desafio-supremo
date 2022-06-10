@@ -8,13 +8,11 @@ import '../../../infra/models/detail_statement_model/detail_statement_model.dart
 class DetailStatementBloc
     extends Bloc<DetailStatemenEvents, DetailStatementState> {
   final DetailStatementUsecase usecase;
-  String id = "";
 
-  DetailStatementBloc(this.usecase, {required this.id})
-      : super(DetailStatementInitialState()) {
+  DetailStatementBloc(this.usecase) : super(DetailStatementInitialState()) {
     on<LoadDetailStatementsEvents>((event, emit) async => emit(
         DetailStatementSuccessState(
-            detailStatement: await _getDetailStatement(id))));
+            detailStatement: await _getDetailStatement(event.id))));
   }
 
   Future<DetailStatementModel?> _getDetailStatement(String id) async {

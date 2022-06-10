@@ -1,3 +1,12 @@
-abstract class DetailStatemenEvents {}
+import 'package:equatable/equatable.dart';
 
-class LoadDetailStatementsEvents extends DetailStatemenEvents {}
+abstract class DetailStatemenEvents extends Equatable {}
+
+class LoadDetailStatementsEvents extends DetailStatemenEvents {
+  final String id;
+
+  LoadDetailStatementsEvents({required this.id});
+
+  @override
+  List<Object?> get props => [id];
+}

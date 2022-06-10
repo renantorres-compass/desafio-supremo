@@ -24,7 +24,7 @@ Widget customList(ThemeData appTheme, BuildContext context,
               style: TextButton.styleFrom(
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.zero)),
-              onPressed: () => _navigateToDetailsPage(context),
+              onPressed: () => _navigateToDetailsPage(context, list[index].id),
               child: Flex(
                 direction: Axis.horizontal,
                 children: [
@@ -62,7 +62,11 @@ Widget _customDivider() {
   );
 }
 
-_navigateToDetailsPage(BuildContext context) {
+_navigateToDetailsPage(BuildContext context, String? id) {
   Navigator.push(
-      context, MaterialPageRoute(builder: (context) => DetailsPage()));
+      context,
+      MaterialPageRoute(
+          builder: (context) => DetailsPage(
+                id: id,
+              )));
 }
