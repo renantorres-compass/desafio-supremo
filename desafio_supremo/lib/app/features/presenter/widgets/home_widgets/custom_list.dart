@@ -1,3 +1,4 @@
+import 'package:desafio_supremo/app/features/presenter/pages/details_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/ui/ui.dart';
@@ -19,19 +20,25 @@ Widget customList(ThemeData appTheme, BuildContext context,
                 : Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 17),
             height: 89,
-            child: Flex(
-              direction: Axis.horizontal,
-              children: [
-                _customDivider(),
-                customListTile(appTheme,
-                    typeAmount: Utils.convertMoneyValueWithType(
-                        list[index].amount.toString(), list[index].tType),
-                    typeOrigin: list[index].from ?? list[index].to ?? "",
-                    typeTitle: list[index].description ?? ""),
-                dateWidget(appTheme, context,
-                    date: Utils.convertDateToDayMonth(list[index].createdAt),
-                    isPix: Utils.convertToIsPix(list[index].tType))
-              ],
+            child: TextButton(
+              style: TextButton.styleFrom(
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero)),
+              onPressed: () => _navigateToDetailsPage(context),
+              child: Flex(
+                direction: Axis.horizontal,
+                children: [
+                  _customDivider(),
+                  customListTile(appTheme,
+                      typeAmount: Utils.convertMoneyValueWithType(
+                          list[index].amount.toString(), list[index].tType),
+                      typeOrigin: list[index].from ?? list[index].to ?? "",
+                      typeTitle: list[index].description ?? ""),
+                  dateWidget(appTheme, context,
+                      date: Utils.convertDateToDayMonth(list[index].createdAt),
+                      isPix: Utils.convertToIsPix(list[index].tType))
+                ],
+              ),
             ),
           );
         },
@@ -53,4 +60,9 @@ Widget _customDivider() {
       )
     ],
   );
+}
+
+_navigateToDetailsPage(BuildContext context) {
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => DetailsPage()));
 }
