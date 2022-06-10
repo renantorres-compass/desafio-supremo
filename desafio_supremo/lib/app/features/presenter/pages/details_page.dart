@@ -1,8 +1,10 @@
-import 'package:desafio_supremo/app/features/infra/models/detail_statement_model/detail_statement_model.dart';
+import 'package:desafio_supremo/app/features/presenter/bloc/detail_statement/detail_statement.dart';
+import 'package:desafio_supremo/app/features/presenter/bloc/detail_statement/detail_statement_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/utils/utils.dart';
-import '../bloc/detail_statement/detail_statement.dart';
+import '../widgets/details_widgets/details_widgets.dart';
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({Key? key, this.id}) : super(key: key);
@@ -14,20 +16,20 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  // late DetailStatementBloc detailStatementBloc;
+  late DetailStatementBloc detailStatementBloc;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   detailStatementBloc = DetailStatementBloc(s1());
-  //   detailStatementBloc.add(LoadDetailStatementsEvents(id: widget.id ?? ""));
-  // }
+  @override
+  void initState() {
+    super.initState();
+    detailStatementBloc = DetailStatementBloc(s1());
+    detailStatementBloc.add(LoadDetailStatementsEvents(id: widget.id ?? ""));
+  }
 
-  // @override
-  // void dispose() {
-  //   detailStatementBloc.close();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    detailStatementBloc.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +60,11 @@ class _DetailsPageState extends State<DetailsPage> {
                 style: appTheme.textTheme.headline3,
               ),
             ),
+            BlocBuilder<DetailStatementBloc, DetailStatementState>(
+                bloc: detailStatementBloc,
+                builder: (context, state) {
+                  return customDetailsList(appTheme, state.detailStatement!);
+                })
           ],
         ),
       ),
