@@ -1,3 +1,4 @@
+import 'package:desafio_supremo/app/features/presenter/bloc/view_amount_bloc/view_amount_bloc.dart';
 import 'package:desafio_supremo/app/features/presenter/widgets/home_widgets/home_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +10,7 @@ import '../../bloc/my_balance/my_balance.dart';
 Widget balanceBlocBuilder(
     {required MyBalanceBloc myBalanceBloc,
     required ThemeData appTheme,
-    required bool viewAmount}) {
+    required ViewAmountBloc viewAmountBloc}) {
   return BlocBuilder<MyBalanceBloc, MyBalanceState>(
       bloc: myBalanceBloc,
       builder: (context, state) {
@@ -27,12 +28,12 @@ Widget balanceBlocBuilder(
 
           case LoadingStatus.empty:
             return amountWidget(
-                appTheme, viewAmount, Utils.convertMoneyValue(amount));
+                appTheme, Utils.convertMoneyValue(amount), viewAmountBloc);
 
           case LoadingStatus.complete:
           default:
             return amountWidget(
-                appTheme, viewAmount, Utils.convertMoneyValue(amount));
+                appTheme, Utils.convertMoneyValue(amount), viewAmountBloc);
         }
       });
 }

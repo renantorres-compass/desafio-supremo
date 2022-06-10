@@ -2,6 +2,8 @@ import 'package:desafio_supremo/app/features/presenter/bloc/my_balance/my_balanc
 
 import 'package:desafio_supremo/app/features/presenter/bloc/my_statement/my_statement_bloc.dart';
 import 'package:desafio_supremo/app/features/presenter/bloc/my_statement/my_statement_events.dart';
+import 'package:desafio_supremo/app/features/presenter/bloc/view_amount_bloc/view_amount_bloc.dart';
+import 'package:desafio_supremo/app/features/presenter/bloc/view_amount_bloc/view_amount_events.dart';
 import 'package:flutter/material.dart';
 import '../../../core/utils/dependency_injection.dart';
 import '../widgets/home_widgets/home_widgets.dart';
@@ -16,8 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late MyStatementBloc myStatementBloc;
   late MyBalanceBloc myBalanceBloc;
-  bool? isPix;
-  late bool viewAmount;
+  late ViewAmountBloc viewAmountBloc;
 
   @override
   void initState() {
@@ -28,12 +29,16 @@ class _HomePageState extends State<HomePage> {
 
     myBalanceBloc = MyBalanceBloc(s1());
     myBalanceBloc.add(LoadMyBalanceEvents());
-    viewAmount = true;
+
+    viewAmountBloc = ViewAmountBloc();
+    viewAmountBloc.add(LoadViewAmountEvents());
   }
 
   @override
   void dispose() {
     myStatementBloc.close();
+    myBalanceBloc.close();
+    viewAmountBloc.close();
     super.dispose();
   }
 
@@ -41,7 +46,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final appTheme = Theme.of(context);
     final size = MediaQuery.of(context).size;
-    isPix = true;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Extrato'),
@@ -55,7 +60,7 @@ class _HomePageState extends State<HomePage> {
             balanceBlocBuilder(
                 appTheme: appTheme,
                 myBalanceBloc: myBalanceBloc,
-                viewAmount: true),
+                viewAmountBloc: viewAmountBloc),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 21),
               alignment: AlignmentDirectional.topStart,
