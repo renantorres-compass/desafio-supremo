@@ -58,4 +58,26 @@ class Utils {
       return "R\$ 0,00";
     }
   }
+
+  static String convertDateHour(String? date) {
+    if (date != null && date.isNotEmpty) {
+      var dateTime = DateTime.parse(date);
+      String day = "${dateTime.day}/${dateTime.month}/${dateTime.year}";
+      String hour = "${dateTime.hour}:${dateTime.minute}:${dateTime.second}";
+      return "$day - $hour";
+    } else {
+      return "";
+    }
+  }
+
+  static List convertDetailStatementModeltoList(DetailStatementModel value) {
+    return [
+      value.description,
+      convertMoneyValue(value.amount.toString()),
+      value.to ?? value.from,
+      value.bankName,
+      convertDateHour(value.createdAt),
+      value.authentication
+    ];
+  }
 }
