@@ -1,6 +1,5 @@
 import 'package:desafio_supremo/app/features/presenter/bloc/detail_statement/detail_statement.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/ui/ui.dart';
 import '../../../core/utils/utils.dart';
@@ -71,47 +70,13 @@ class _DetailsPageState extends State<DetailsPage> {
                 ],
               ),
             ),
-            BlocBuilder<DetailStatementBloc, DetailStatementState>(
-                bloc: detailStatementBloc,
-                builder: (context, state) {
-                  switch (detailStatementBloc.loadingStatus) {
-                    case LoadingStatus.loading:
-                      return const SizedBox(
-                        height: 300,
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            color: AppColors.primaryColorDark,
-                          ),
-                        ),
-                      );
-                    case LoadingStatus.empty:
-                      return const SizedBox();
-                    case LoadingStatus.complete:
-                    default:
-                      return customDetailsList(
-                          appTheme, state.detailStatement, context);
-                  }
-                }),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 30),
-              child: Container(
-                width: size.width,
-                height: 48,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 17,
-                ),
-                child: TextButton(
-                    style: TextButton.styleFrom(
-                        primary: AppColors.primaryColorLight,
-                        backgroundColor: AppColors.primaryColor,
-                        shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.zero)),
-                    onPressed: () {},
-                    child: Text(
-                      'Compartilhar',
-                      style: appTheme.textTheme.subtitle2,
-                    )),
-              ),
+            detailsBlocBuilder(
+                appTheme: appTheme,
+                context: context,
+                detailStatementBloc: detailStatementBloc),
+            shareDetailsButton(
+              appTheme: appTheme,
+              context: context,
             )
           ],
         ),
