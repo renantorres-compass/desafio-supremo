@@ -22,6 +22,7 @@ Widget customList(ThemeData appTheme, BuildContext context,
             height: 89,
             child: TextButton(
               style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.zero)),
               onPressed: () => _navigateToDetailsPage(context, list[index].id),
