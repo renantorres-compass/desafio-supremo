@@ -1,8 +1,8 @@
 import 'package:desafio_supremo/app/features/presenter/bloc/detail_statement/detail_statement.dart';
-import 'package:desafio_supremo/app/features/presenter/bloc/detail_statement/detail_statement_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/ui/ui.dart';
 import '../../../core/utils/utils.dart';
 import '../widgets/details_widgets/details_widgets.dart';
 
@@ -49,21 +49,48 @@ class _DetailsPageState extends State<DetailsPage> {
         ),
       ),
       body: SizedBox(
+        height: size.height,
+        width: size.width,
         child: Flex(
           direction: Axis.vertical,
           children: [
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 21),
               alignment: AlignmentDirectional.topStart,
-              child: Text(
-                'Comprovante',
-                style: appTheme.textTheme.headline3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Comprovante',
+                    style: appTheme.textTheme.headline3,
+                  ),
+                  const Divider(
+                    thickness: 0.5,
+                    color: AppColors.textColor,
+                  )
+                ],
               ),
             ),
             BlocBuilder<DetailStatementBloc, DetailStatementState>(
                 bloc: detailStatementBloc,
                 builder: (context, state) {
-                  return customDetailsList(appTheme, state.detailStatement!);
+                  switch (detailStatementBloc.loadingStatus) {
+                    case LoadingStatus.loading:
+                      return const SizedBox(
+                        height: 300,
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.primaryColorDark,
+                          ),
+                        ),
+                      );
+                    case LoadingStatus.empty:
+                      return const SizedBox();
+                    case LoadingStatus.complete:
+                    default:
+                      return customDetailsList(
+                          appTheme, state.detailStatement, context);
+                  }
                 })
           ],
         ),

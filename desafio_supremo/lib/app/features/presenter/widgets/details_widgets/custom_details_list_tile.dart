@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-Widget customDetailsListTile(
-    ThemeData appTheme, String titleType, String textType) {
+Widget customDetailsListTile(ThemeData appTheme, String titleType,
+    String textType, BuildContext context) {
+  final size = MediaQuery.of(context).size;
   return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 21),
+    height: 45,
+    width: size.width,
     alignment: AlignmentDirectional.topStart,
     child: Flex(
       direction: Axis.vertical,
@@ -13,13 +15,13 @@ Widget customDetailsListTile(
         Flexible(
           child: Text(
             titleType,
-            style: appTheme.textTheme.bodyText1,
+            style: appTheme.textTheme.headline3,
           ),
         ),
         Flexible(
           child: Text(
             textType,
-            style: appTheme.textTheme.subtitle1,
+            style: appTheme.textTheme.bodyText1,
           ),
         ),
       ],

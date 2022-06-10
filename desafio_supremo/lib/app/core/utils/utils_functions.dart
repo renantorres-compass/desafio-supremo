@@ -72,12 +72,12 @@ class Utils {
 
   static List convertDetailStatementModeltoList(DetailStatementModel value) {
     return [
-      value.description,
+      value.description ?? "",
       convertMoneyValue(value.amount.toString()),
-      value.to ?? value.from,
-      value.bankName,
+      value.to ?? value.from ?? "",
+      value.bankName ?? "",
       convertDateHour(value.createdAt),
-      value.authentication
+      value.authentication ?? ""
     ];
   }
 }
