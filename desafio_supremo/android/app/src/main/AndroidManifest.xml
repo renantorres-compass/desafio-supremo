@@ -3,7 +3,7 @@
 
   
    <application
-        android:label="desafio_supremo"
+        android:label="Desafio Supremo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
