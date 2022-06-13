@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:dio/dio.dart';
 
 import '../../../../core/constants/constants.dart';
@@ -16,6 +17,7 @@ class MyStatementDioDatasource implements MyStatementDatasource {
 
       return result;
     } on DioError catch (e) {
+      BotToast.showText(text: e.response?.statusMessage ?? "");
       return StatementItemsModel(items: []);
     }
   }

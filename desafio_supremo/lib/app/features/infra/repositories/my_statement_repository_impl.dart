@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:desafio_supremo/app/features/domain/errors/errors.dart';
 import 'package:desafio_supremo/app/features/domain/entities/statement_entity.dart';
 import 'package:dartz/dartz.dart';
@@ -15,7 +16,7 @@ class MyStatementRepositoryImpl extends MyStatementRepository {
       final result = await datasource.getMyStatementsList();
       return Right(result);
     } catch (e) {
-      print(e.toString());
+      BotToast.showText(text: e.toString());
       return Left(DatasourceError());
     }
   }

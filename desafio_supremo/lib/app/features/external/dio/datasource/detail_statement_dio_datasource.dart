@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:desafio_supremo/app/features/external/dio/service/statement_detail_service/detail_statement_service.dart';
 import 'package:desafio_supremo/app/features/infra/datasource/detail_statement_datasource.dart';
 import 'package:desafio_supremo/app/features/infra/models/detail_statement_model/detail_statement_model.dart';
@@ -16,7 +17,7 @@ class DetailStatementDioDatasource implements DetailStatementDatasource {
 
       return result;
     } on DioError catch (e) {
-      
+      BotToast.showText(text: e.response?.statusMessage ?? "");
       return null;
     }
   }

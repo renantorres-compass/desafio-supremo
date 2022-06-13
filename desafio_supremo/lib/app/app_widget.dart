@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:desafio_supremo/app/core/ui/app_theme.dart';
 import 'package:desafio_supremo/app/features/presenter/pages/home_page.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,8 @@ class AppWidget extends StatelessWidget {
           statusBarIconBrightness: Brightness.dark),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        builder: BotToastInit(),
+        navigatorObservers: [BotToastNavigatorObserver()],
         theme: appThemeData(),
         home: const HomePage(),
       ),
