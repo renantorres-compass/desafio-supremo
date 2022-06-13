@@ -90,13 +90,16 @@ class Utils {
   static Future<void> captureImgAndShare(
       ScreenshotController screenshotController, BuildContext context) async {
     double pixelRatio = MediaQuery.of(context).devicePixelRatio;
+    String fileName = DateTime.now().microsecondsSinceEpoch.toString();
 
     await screenshotController
-        .capture(pixelRatio: pixelRatio)
+        .capture(
+            pixelRatio: pixelRatio, delay: const Duration(milliseconds: 10))
         .then((imageFile) async {
       if (imageFile != null) {
         final directory = await getApplicationDocumentsDirectory();
-        final imagePath = await File('${directory.path}/image.png').create();
+        final imagePath =
+            await File('${directory.path}/$fileName.png').create();
         await imagePath.writeAsBytes(imageFile);
         await Share.shareFiles([imagePath.path]);
       }

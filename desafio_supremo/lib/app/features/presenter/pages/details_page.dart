@@ -17,7 +17,7 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   late DetailStatementBloc detailStatementBloc;
-  late ScreenshotController screenshotController = ScreenshotController();
+  ScreenshotController screenshotController = ScreenshotController();
 
   @override
   void initState() {
@@ -53,9 +53,9 @@ class _DetailsPageState extends State<DetailsPage> {
       body: Screenshot(
         controller: screenshotController,
         child: Container(
+          color: Colors.white,
           height: size.height,
           width: size.width,
-          decoration: const BoxDecoration(color: Colors.white),
           child: Flex(
             direction: Axis.vertical,
             children: [
