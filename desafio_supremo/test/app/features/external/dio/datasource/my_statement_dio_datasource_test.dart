@@ -23,7 +23,6 @@ void main() {
   ];
 
   final items = StatementItemsModel(items: list);
-  final itemsEmpty = StatementItemsModel(items: []);
 
   test('Should return a items list with Statement Model', () async {
     when(() => service.getMyStatement(Auth.tokenValue))

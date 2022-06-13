@@ -1,4 +1,3 @@
-import 'package:dartz/dartz_streaming.dart';
 import 'package:desafio_supremo/app/features/domain/entities/detail_statement.dart';
 import 'package:json_annotation/json_annotation.dart';
 
