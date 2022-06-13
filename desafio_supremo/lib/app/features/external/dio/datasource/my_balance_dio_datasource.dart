@@ -16,7 +16,7 @@ class MyBalanceDioDatasource implements MyBalanceDatasource {
 
       return result;
     } on DioError catch (e) {
-      BotToast.showText(text: e.response?.statusMessage ?? "");
+      BotToast.showText(text: e.response?.statusMessage ?? "DioError unknow");
       return null;
     }
   }

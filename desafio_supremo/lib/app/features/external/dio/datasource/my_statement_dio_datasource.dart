@@ -17,7 +17,7 @@ class MyStatementDioDatasource implements MyStatementDatasource {
 
       return result;
     } on DioError catch (e) {
-      BotToast.showText(text: e.response?.statusMessage ?? "");
+      BotToast.showText(text: e.response?.statusMessage ?? "DioError unknow");
       return StatementItemsModel(items: []);
     }
   }

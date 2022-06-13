@@ -16,7 +16,6 @@ class MyStatementRepositoryImpl extends MyStatementRepository {
       final result = await datasource.getMyStatementsList();
       return Right(result);
     } catch (e) {
-      BotToast.showText(text: e.toString());
       return Left(DatasourceError());
     }
   }
