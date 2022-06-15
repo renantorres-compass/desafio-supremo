@@ -35,8 +35,8 @@ class CustomDetailsList extends StatelessWidget {
                         horizontal: 17, vertical: 12),
                     child: CustomDetailsListTile(
                       appTheme: appTheme,
-                      textType: titleList[index],
-                      titleType: list[index],
+                      textType: list[index],
+                      titleType: titleList[index],
                     ),
                   );
                 })

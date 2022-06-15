@@ -1,4 +1,3 @@
-import 'package:bot_toast/bot_toast.dart';
 import 'package:desafio_supremo/app/features/domain/errors/errors.dart';
 import 'package:desafio_supremo/app/features/domain/entities/statement_entity.dart';
 import 'package:dartz/dartz.dart';
