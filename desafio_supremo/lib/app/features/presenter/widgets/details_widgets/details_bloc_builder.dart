@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/ui/ui.dart';
 import '../../../../core/utils/utils.dart';
@@ -21,9 +22,9 @@ class DetailsBlocBuilder extends StatelessWidget {
         builder: (context, state) {
           switch (detailStatementBloc.loadingStatus) {
             case LoadingStatus.loading:
-              return const SizedBox(
-                height: 300,
-                child: Center(
+              return SizedBox(
+                height: 300.h,
+                child: const Center(
                   child: CircularProgressIndicator(
                     color: AppColors.primaryColorDark,
                   ),

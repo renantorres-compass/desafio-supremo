@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomDetailsListTile extends StatelessWidget {
   const CustomDetailsListTile(
@@ -16,7 +17,7 @@ class CustomDetailsListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      height: 45,
+      height: 45.h,
       width: size.width,
       alignment: AlignmentDirectional.topStart,
       child: Flex(

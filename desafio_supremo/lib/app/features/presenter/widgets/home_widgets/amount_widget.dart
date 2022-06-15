@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/ui/ui.dart';
 import '../../bloc/view_amount_bloc/view_amount.dart';
@@ -24,10 +25,10 @@ class AmountWidget extends StatelessWidget {
           return state.viewAmount != null
               ? Flexible(
                   child: Container(
-                  height: 91,
+                  height: 91.h,
                   color: AppColors.primaryColorLight,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 17),
+                    padding: EdgeInsets.symmetric(horizontal: 17.w),
                     child: Flex(
                       direction: Axis.vertical,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -39,7 +40,7 @@ class AmountWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(right: 11),
+                              padding: EdgeInsets.only(right: 11.w),
                               child: Text(
                                 'Seu saldo',
                                 style: appTheme.textTheme.bodyText1,
@@ -51,12 +52,14 @@ class AmountWidget extends StatelessWidget {
                                       viewAmount: state.viewAmount!));
                                 },
                                 child: state.viewAmount!
-                                    ? const Icon(
+                                    ? Icon(
                                         Icons.visibility,
+                                        size: 24.sp,
                                         color: AppColors.primaryColor,
                                       )
-                                    : const Icon(
+                                    : Icon(
                                         Icons.visibility_off,
+                                        size: 24.sp,
                                         color: AppColors.primaryColor,
                                       ))
                           ],
@@ -76,8 +79,8 @@ class AmountWidget extends StatelessWidget {
                     ),
                   ),
                 ))
-              : const SizedBox(
-                  height: 91,
+              : SizedBox(
+                  height: 91.h,
                 );
         });
   }

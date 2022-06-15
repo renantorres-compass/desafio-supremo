@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/utils.dart';
 import '../../../infra/models/detail_statement_model/detail_statement_model.dart';
@@ -31,8 +32,8 @@ class CustomDetailsList extends StatelessWidget {
                 itemCount: list.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 17, vertical: 12),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 17.w, vertical: 12.h),
                     child: CustomDetailsListTile(
                       appTheme: appTheme,
                       textType: list[index],

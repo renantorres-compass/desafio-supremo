@@ -1,6 +1,7 @@
 import 'package:desafio_supremo/app/core/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:screenshot/screenshot.dart';
 
 import '../../../../core/ui/ui.dart';
@@ -31,12 +32,12 @@ class ShareButton extends StatelessWidget {
             case LoadingStatus.complete:
             default:
               return Padding(
-                padding: const EdgeInsets.only(bottom: 30),
+                padding: EdgeInsets.only(bottom: 30.h),
                 child: Container(
                   width: size.width,
-                  height: 48,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 17,
+                  height: 48.h,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 17.w,
                   ),
                   child: TextButton(
                       style: TextButton.styleFrom(

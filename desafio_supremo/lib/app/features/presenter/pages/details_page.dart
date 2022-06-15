@@ -1,5 +1,6 @@
 import 'package:desafio_supremo/app/features/presenter/bloc/detail_statement/detail_statement.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:screenshot/screenshot.dart';
 
 import '../../../core/ui/ui.dart';
@@ -40,13 +41,13 @@ class _DetailsPageState extends State<DetailsPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          splashRadius: 30,
+          splashRadius: 30.r,
           padding: EdgeInsets.zero,
-          iconSize: 24,
+          iconSize: 24.sp,
           onPressed: () => Navigator.pop(context),
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back_ios_new_rounded,
-            size: 24,
+            size: 24.sp,
           ),
         ),
       ),
@@ -60,8 +61,7 @@ class _DetailsPageState extends State<DetailsPage> {
             direction: Axis.vertical,
             children: [
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 17, vertical: 21),
+                padding: EdgeInsets.symmetric(horizontal: 17.w, vertical: 21.h),
                 alignment: AlignmentDirectional.topStart,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

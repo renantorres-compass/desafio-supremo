@@ -1,5 +1,6 @@
 import 'package:desafio_supremo/app/features/presenter/pages/details_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/ui/ui.dart';
 import '../../../../core/utils/utils.dart';
@@ -26,8 +27,8 @@ class CustomList extends StatelessWidget {
               color: Utils.convertToIsPix(list[index].tType)
                   ? AppColors.primaryColorLight
                   : Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 17),
-              height: 89,
+              padding: EdgeInsets.symmetric(horizontal: 17.w),
+              height: 89.h,
               child: TextButton(
                 style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,

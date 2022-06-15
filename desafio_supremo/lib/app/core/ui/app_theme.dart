@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ThemeData appThemeData() {
   const primaryColor = Color(0xFF00C1AF);
@@ -8,42 +9,42 @@ ThemeData appThemeData() {
   const textColor = Color(0xFF202021);
 
   final textTheme = TextTheme(
-    headline1: const TextStyle(
+    headline1: TextStyle(
         letterSpacing: 0,
         color: primaryColor,
-        fontSize: 24,
+        fontSize: 24.sp,
         fontWeight: FontWeight.bold),
     headline2: TextStyle(
         letterSpacing: 0,
         color: textColor,
-        fontSize: 14,
+        fontSize: 14.sp,
         fontWeight: FontWeight.bold,
         shadows: [
           Shadow(
-              blurRadius: 5,
+              blurRadius: 5.r,
               offset: const Offset(0, 4),
               color: Colors.black.withOpacity(0.25))
         ]),
-    headline3: const TextStyle(
+    headline3: TextStyle(
         letterSpacing: 0,
         color: textColor,
-        fontSize: 14,
+        fontSize: 14.sp,
         fontWeight: FontWeight.w700),
-    bodyText1: const TextStyle(
+    bodyText1: TextStyle(
       letterSpacing: 0,
       color: textColor,
-      fontSize: 14,
+      fontSize: 14.sp,
     ),
-    subtitle1: const TextStyle(
+    subtitle1: TextStyle(
         letterSpacing: 0,
         color: primaryColorDark,
-        fontSize: 14,
+        fontSize: 14.sp,
         fontWeight: FontWeight.w500),
-    subtitle2: const TextStyle(
+    subtitle2: TextStyle(
       letterSpacing: 0,
       color: Colors.white,
       fontWeight: FontWeight.w700,
-      fontSize: 14,
+      fontSize: 14.sp,
     ),
   );
 

@@ -1,6 +1,7 @@
 import 'package:desafio_supremo/app/features/presenter/bloc/my_balance/my_balance.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../features/presenter/bloc/my_statement/my_statement.dart';
 import '../../../features/presenter/bloc/view_amount_bloc/view_amount.dart';
@@ -61,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                 myBalanceBloc: myBalanceBloc,
                 viewAmountBloc: viewAmountBloc),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 21),
+              padding: EdgeInsets.symmetric(horizontal: 17.w, vertical: 21.h),
               alignment: AlignmentDirectional.topStart,
               child: Text(
                 'Suas movimentações',

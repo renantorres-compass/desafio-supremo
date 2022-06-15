@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/ui/ui.dart';
 
@@ -19,12 +20,12 @@ class DateWidget extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Flexible(
         child: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 17.w, vertical: 5.h),
       child: isPix
           ? Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Container(
                 color: AppColors.primaryColor,
-                height: 19,
+                height: 19.h,
                 width: size.width,
                 alignment: Alignment.center,
                 child: Text(
