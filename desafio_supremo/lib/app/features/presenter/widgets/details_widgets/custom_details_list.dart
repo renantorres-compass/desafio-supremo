@@ -28,7 +28,6 @@ class CustomDetailsList extends StatelessWidget {
         child: model != null
             ? ListView.builder(
                 shrinkWrap: true,
-                itemExtent: 10,
                 itemCount: list.length,
                 itemBuilder: (context, index) {
                   return Padding(
