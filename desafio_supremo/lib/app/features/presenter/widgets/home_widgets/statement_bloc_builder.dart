@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/ui/ui.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../infra/models/statement_model/statement_model.dart';
 import '../../bloc/my_statement/my_statement.dart';
-import './home_widgets.dart';
+import '../widgets.dart';
 
 class StatementBlocBuilder extends StatelessWidget {
   const StatementBlocBuilder(
@@ -23,14 +21,7 @@ class StatementBlocBuilder extends StatelessWidget {
         builder: (context, state) {
           switch (myStatementBloc.loadingStatus) {
             case LoadingStatus.loading:
-              return  SizedBox(
-                height: 300.h,
-                child: const Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.primaryColor,
-                  ),
-                ),
-              );
+              return const CustomCircularProgress();
 
             case LoadingStatus.empty:
               return const SizedBox();

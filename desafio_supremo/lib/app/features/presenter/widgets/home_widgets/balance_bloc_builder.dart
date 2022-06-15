@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/ui/ui.dart';
 import '../../../../core/utils/utils.dart';
 import '../../bloc/my_balance/my_balance.dart';
 import '../../bloc/view_amount_bloc/view_amount.dart';
-import './home_widgets.dart';
+import '../widgets.dart';
 
 class BalanceBlocBuilder extends StatelessWidget {
   const BalanceBlocBuilder(
@@ -28,14 +26,7 @@ class BalanceBlocBuilder extends StatelessWidget {
           String amount = state.balance?.amount.toString() ?? "";
           switch (myBalanceBloc.loadingStatus) {
             case LoadingStatus.loading:
-              return SizedBox(
-                height: 50.h,
-                child: const Center(
-                  child: LinearProgressIndicator(
-                    color: AppColors.primaryColor,
-                  ),
-                ),
-              );
+              return const CustomLinearProgress();
 
             case LoadingStatus.empty:
             case LoadingStatus.complete:
