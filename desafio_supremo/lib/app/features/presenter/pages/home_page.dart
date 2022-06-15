@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
         child: Flex(
           direction: Axis.vertical,
           children: [
-            balanceBlocBuilder(
+            BalanceBlocBuilder(
                 appTheme: appTheme,
                 myBalanceBloc: myBalanceBloc,
                 viewAmountBloc: viewAmountBloc),
@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                 style: appTheme.textTheme.headline3,
               ),
             ),
-            statementBlocBuilder(
+            StatementBlocBuilder(
                 appTheme: appTheme, myStatementBloc: myStatementBloc)
           ],
         ),

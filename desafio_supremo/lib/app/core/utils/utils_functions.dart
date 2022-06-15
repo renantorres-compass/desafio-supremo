@@ -76,15 +76,17 @@ class Utils {
     }
   }
 
-  static List convertDetailStatementModeltoList(DetailStatementModel value) {
-    return [
-      value.description ?? "",
-      convertMoneyValue(value.amount.toString()),
-      value.to ?? value.from ?? "",
-      value.bankName ?? "",
-      convertDateHour(value.createdAt),
-      value.authentication ?? ""
-    ];
+  static List convertDetailStatementModeltoList(DetailStatementModel? value) {
+    return value != null
+        ? [
+            value.description ?? "",
+            convertMoneyValue(value.amount.toString()),
+            value.to ?? value.from ?? "",
+            value.bankName ?? "",
+            convertDateHour(value.createdAt),
+            value.authentication ?? ""
+          ]
+        : [];
   }
 
   static Future<void> captureImgAndShare(

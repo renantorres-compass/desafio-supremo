@@ -77,13 +77,10 @@ class _DetailsPageState extends State<DetailsPage> {
                   ],
                 ),
               ),
-              detailsBlocBuilder(
+              DetailsBlocBuilder(
+                  appTheme: appTheme, detailStatementBloc: detailStatementBloc),
+              ShareButton(
                   appTheme: appTheme,
-                  context: context,
-                  detailStatementBloc: detailStatementBloc),
-              shareDetailsButton(
-                  appTheme: appTheme,
-                  context: context,
                   screenshotController: screenshotController,
                   detailStatementBloc: detailStatementBloc)
             ],
