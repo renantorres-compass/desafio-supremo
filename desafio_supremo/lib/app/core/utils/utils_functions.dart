@@ -10,46 +10,13 @@ import '../../features/infra/models/detail_statement_model/detail_statement_mode
 
 class Utils {
   static String convertDateToDayMonth(String? date) {
-    if (date != null) {
-      return '${date.substring(8, 10)}/${date.substring(5, 7)}';
-    } else {
-      return "";
-    }
+    return date != null
+        ? '${date.substring(8, 10)}/${date.substring(5, 7)}'
+        : "";
   }
 
   static bool convertToIsPix(String? tType) {
-    if (tType != null) {
-      if (tType.contains('PIX')) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  }
-
-  static String convertMoneyValueWithType(String? amount, String? tType) {
-    bool isOut = false;
-    if (tType != null) {
-      if (tType.contains('OUT')) {
-        isOut = true;
-      } else {
-        isOut = false;
-      }
-    } else {
-      isOut = false;
-    }
-    if (amount != null) {
-      var controller = MoneyMaskedTextController(
-          initialValue: double.parse(amount),
-          decimalSeparator: ',',
-          thousandSeparator: '');
-
-      return '${isOut ? "- " : ""}R\$ ${controller.text}';
-    } else {
-      return "${isOut ? "- " : ""} R\$ 0,00";
-    }
+    return tType != null ? tType.contains('PIX') : false;
   }
 
   static String convertMoneyValue(String? amount) {
@@ -63,6 +30,14 @@ class Utils {
     } else {
       return "R\$ 0,00";
     }
+  }
+
+  static String convertMoneyValueWithType(String? amount, String? tType) {
+    bool isOut = tType != null ? tType.contains('OUT') : false;
+
+    String value = convertMoneyValue(amount);
+
+    return '${isOut ? "- " : ""} $value';
   }
 
   static String convertDateHour(String? date) {
