@@ -1,0 +1,62 @@
+workflows:
+  android-workflow:
+    name: Android Workflow
+    instance_type: mac_mini
+    max_build_duration: 60
+    environment:
+      groups:
+        - keystore_credentials
+          # CM_KEYSTORE <-- Put your keystore file here
+          # CM_KEYSTORE_PASSWORD <-- Put your keystore password here
+          # CM_KEY_PASSWORD <-- Put your keystore alias password here
+          # CM_KEY_ALIAS <-- Put your keystore alias username here
+        - google_play_credentials
+          # <-- (Includes GCLOUD_SERVICE_ACCOUNT_CREDENTIALS - Put your google-services.json here)
+      vars:
+        CM_KEYSTORE_PATH: /tmp/keystore.keystore
+        PACKAGE_NAME: "com.example.desafio_supremo"
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    cache:
+      cache_paths:
+        - ~/.pub-cache
+        - ~/.gradle/caches
+    triggering:
+      events:
+        - push
+        - pull_request
+        - tag
+      branch_patterns:
+        - pattern: "main"
+          include: true
+          source: true
+      cancel_previous_builds: false
+    scripts:
+       scripts:       
+      - name: Set up local.properties
+        script: |
+          echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+      - name: Get Flutter packages
+        script: |
+          cd . && flutter packages pub get
+      - name: Flutter analyze
+        script: |
+          cd . && flutter analyze
+      - name: Flutter unit tests
+        script: |
+          cd . && flutter test
+        ignore_failure: true
+      - name: Build APK with Flutter
+        script: |
+          cd . && flutter build apk --release --build-name=1.0.0 --build-number=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks "$GOOGLE_PLAY_TRACK") + 1))
+    artifacts:
+      - build/**/outputs/bundle/**/*.aab
+      - build/**/outputs/**/*.apk
+      - build/**/outputs/**/mapping.txt
+      - flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - name@example.com
+     
