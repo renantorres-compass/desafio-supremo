@@ -33,6 +33,15 @@ workflows:
           source: true
       cancel_previous_builds: false
     scripts:
+      - name: Set up key.properties
+        script: |
+          echo $CM_KEYSTORE | base64 --decode > $CM_KEYSTORE_PATH   # Not required if using team code signing identities
+          cat >> "$CM_BUILD_DIR/project_directory/android/key.properties" <<EOF
+          storePassword=$CM_KEYSTORE_PASSWORD
+          keyPassword=$CM_KEY_PASSWORD
+          keyAlias=$CM_KEY_ALIAS
+          storeFile=$CM_KEYSTORE_PATH
+          EOF  
        scripts:       
       - name: Set up local.properties
         script: |
@@ -59,4 +68,69 @@ workflows:
       email:
         recipients:
           - name@example.com
-     
+  ios-workflow:
+    name: iOS Workflow
+    instance_type: mac_mini
+    max_build_duration: 60
+    environment:
+      groups:
+        - appstore_credentials
+        - ios_config
+      vars:
+        XCODE_WORKSPACE: "Runner.xcworkspace"
+        XCODE_SCHEME: "Runner"                
+        BUNDLE_ID: "com.example.desafio_supremo" # <-- Put your bundle id here
+        APP_STORE_ID:  
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    triggering:
+      events:
+        - push
+        - pull_request
+        - tag
+      branch_patterns:
+        - pattern: "main"
+          include: true
+          source: true
+    scripts:
+      - name: Get Flutter Packages
+        script: |
+          cd . && flutter packages pub get
+      - name: Pod install
+        script: |
+          find . -name "Podfile" -execdir pod install \;
+      - name: Set up keychain to be used for codesigning using Codemagic CLI 'keychain' command
+        script: |
+          keychain initialize
+      - name: Fetch signing files
+        script: |
+          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
+      - name: Add certs to keychain
+        script: |
+          keychain add-certificates
+      - name: Set up code signing settings on Xcode project
+        script: |
+          xcode-project use-profiles
+      - name: Flutter build ipa and automatic versioning
+        script: |
+          flutter build ipa --release \
+          --build-name=1.0.0 \
+          --build-number=$(($(app-store-connect get-latest-testflight-build-number "$APP_STORE_ID") + 1)) \
+          --export-options-plist=/Users/builder/export_options.plist \
+          --flavor="$XCODE_SCHEME" \
+          -t "$ENTRY_POINT"      
+    artifacts: 
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - flutter_drive.log
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+    publishing:
+      email:
+        recipients:
+          - name@example.com
+       app_store_connect:   # https://docs.codemagic.io/publishing-yaml/distribution              
+        api_key: $APP_STORE_CONNECT_PRIVATE_KEY         # Contents of the API key, can also reference environment variable such as $APP_STORE_CONNECT_PRIVATE_KEY
+        key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER       # Alphanumeric value that identifies the API key, can also reference environment variable such as $APP_STORE_CONNECT_KEY_IDENTIFIER
+        submit_to_testflight: true  
+
