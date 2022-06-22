@@ -131,4 +131,5 @@ workflows:
       app_store_connect: # https://docs.codemagic.io/publishing-yaml/distribution
         api_key: $APP_STORE_CONNECT_PRIVATE_KEY # Contents of the API key, can also reference environment variable such as $APP_STORE_CONNECT_PRIVATE_KEY
         key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER # Alphanumeric value that identifies the API key, can also reference environment variable such as $APP_STORE_CONNECT_KEY_IDENTIFIER
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
         submit_to_testflight: true
