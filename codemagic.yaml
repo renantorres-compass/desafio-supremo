@@ -33,7 +33,7 @@ workflows:
           source: true
       cancel_previous_builds: false
     scripts:
-      - name: Set up key.properties
+      - name: Set up key properties
         script: |
           echo $CM_KEYSTORE | base64 --decode > $CM_KEYSTORE_PATH   # Not required if using team code signing identities
           cat >> "$CM_BUILD_DIR/project_directory/android/key.properties" <<EOF
@@ -41,9 +41,8 @@ workflows:
           keyPassword=$CM_KEY_PASSWORD
           keyAlias=$CM_KEY_ALIAS
           storeFile=$CM_KEYSTORE_PATH
-          EOF  
-       scripts:       
-      - name: Set up local.properties
+          EOF
+      - name: Set up local properties
         script: |
           echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
       - name: Get Flutter packages
@@ -78,9 +77,9 @@ workflows:
         - ios_config
       vars:
         XCODE_WORKSPACE: "Runner.xcworkspace"
-        XCODE_SCHEME: "Runner"                
+        XCODE_SCHEME: "Runner"
         BUNDLE_ID: "com.example.desafio_supremo" # <-- Put your bundle id here
-        APP_STORE_ID:  
+        #APP_STORE_ID:
       flutter: stable
       xcode: latest
       cocoapods: default
@@ -119,8 +118,8 @@ workflows:
           --build-number=$(($(app-store-connect get-latest-testflight-build-number "$APP_STORE_ID") + 1)) \
           --export-options-plist=/Users/builder/export_options.plist \
           --flavor="$XCODE_SCHEME" \
-          -t "$ENTRY_POINT"      
-    artifacts: 
+          -t "$ENTRY_POINT"
+    artifacts:
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
       - flutter_drive.log
@@ -129,8 +128,7 @@ workflows:
       email:
         recipients:
           - name@example.com
-       app_store_connect:   # https://docs.codemagic.io/publishing-yaml/distribution              
-        api_key: $APP_STORE_CONNECT_PRIVATE_KEY         # Contents of the API key, can also reference environment variable such as $APP_STORE_CONNECT_PRIVATE_KEY
-        key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER       # Alphanumeric value that identifies the API key, can also reference environment variable such as $APP_STORE_CONNECT_KEY_IDENTIFIER
-        submit_to_testflight: true  
-
+      app_store_connect: # https://docs.codemagic.io/publishing-yaml/distribution
+        api_key: $APP_STORE_CONNECT_PRIVATE_KEY # Contents of the API key, can also reference environment variable such as $APP_STORE_CONNECT_PRIVATE_KEY
+        key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER # Alphanumeric value that identifies the API key, can also reference environment variable such as $APP_STORE_CONNECT_KEY_IDENTIFIER
+        submit_to_testflight: true
