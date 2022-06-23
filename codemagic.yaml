@@ -6,14 +6,14 @@ workflows:
     environment:
       groups:
         - keystore_credentials
-          # CM_KEYSTORE <-- Put your keystore file here
-          # CM_KEYSTORE_PASSWORD <-- Put your keystore password here
-          # CM_KEY_PASSWORD <-- Put your keystore alias password here
-          # CM_KEY_ALIAS <-- Put your keystore alias username here
         - google_play_credentials
-          # <-- (Includes GCLOUD_SERVICE_ACCOUNT_CREDENTIALS - Put your google-services.json here)
       vars:
         CM_KEYSTORE_PATH: /tmp/keystore.keystore
+        CM_KEYSTORE: $CM_KEYSTORE
+        CM_KEYSTORE_PASSWORD: $CM_KEYSTORE_PASSWORD
+        CM_KEY_PASSWORD: $CM_KEY_PASSWORD
+        CM_KEY_ALIAS: $CM_KEY_ALIAS
+        GCLOUD_SERVICE_ACCOUNT_CREDENTIALS: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
         PACKAGE_NAME: "com.example.desafio_supremo"
       flutter: stable
       xcode: latest
@@ -35,8 +35,8 @@ workflows:
     scripts:
       - name: Set up key properties
         script: |
-          echo $CM_KEYSTORE | base64 --decode > $CM_KEYSTORE_PATH   # Not required if using team code signing identities
-          cat >> "$CM_BUILD_DIR/project_directory/android/key.properties" <<EOF
+          echo $CM_KEYSTORE | base64 --decode > $CM_KEYSTORE_PATH   
+          cat >> "$CM_BUILD_DIR/$project_directory/android/key.properties" <<EOF
           storePassword=$CM_KEYSTORE_PASSWORD
           keyPassword=$CM_KEY_PASSWORD
           keyAlias=$CM_KEY_ALIAS
@@ -47,14 +47,17 @@ workflows:
           echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
       - name: Get Flutter packages
         script: |
-          cd . && flutter packages pub get
+          cd $project_directory && flutter packages pub get
       - name: Flutter analyze
         script: |
-          cd . && flutter analyze
+          cd $project_directory && flutter analyze
       - name: Flutter unit tests
         script: |
-          cd . && flutter test
-        ignore_failure: true
+          cd $project_directory && flutter test
+        ignore_failure: false
+      - name: Build AppBundle with Flutter
+        script: |
+          cd $project_directory && flutter build appbundle --release --build-name=1.0.0 --build-number=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks "$GOOGLE_PLAY_TRACK") + 1))
       - name: Build APK with Flutter
         script: |
           cd . && flutter build apk --release --build-name=1.0.0 --build-number=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks "$GOOGLE_PLAY_TRACK") + 1))
@@ -67,6 +70,10 @@ workflows:
       email:
         recipients:
           - name@example.com
+      google_play:
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: production
+        in_app_update_priority: 0
   ios-workflow:
     name: iOS Workflow
     instance_type: mac_mini
@@ -78,8 +85,12 @@ workflows:
       vars:
         XCODE_WORKSPACE: "Runner.xcworkspace"
         XCODE_SCHEME: "Runner"
-        BUNDLE_ID: "com.example.desafio_supremo" # <-- Put your bundle id here
-        #APP_STORE_ID:
+        BUNDLE_ID: "com.example.desafio_supremo"
+        APP_STORE_ID: $APP_STORE_ID
+        APP_STORE_CONNECT_KEY_IDENTIFIER: $APP_STORE_CONNECT_KEY_IDENTIFIER
+        APP_STORE_CONNECT_PRIVATE_KEY: $APP_STORE_CONNECT_PRIVATE_KEY
+        APP_STORE_CONNECT_ISSUER_ID: $APP_STORE_CONNECT_ISSUER_ID
+        CERTIFICATE_PRIVATE_KEY: $CERTIFICATE_PRIVATE_KEY
       flutter: stable
       xcode: latest
       cocoapods: default
@@ -95,7 +106,14 @@ workflows:
     scripts:
       - name: Get Flutter Packages
         script: |
-          cd . && flutter packages pub get
+          cd $project_directory && flutter packages pub get
+      - name: Flutter analyze
+        script: |
+          cd $project_directory && flutter analyze
+      - name: Flutter unit tests
+        script: |
+          cd $project_directory && flutter test
+        ignore_failure: false
       - name: Pod install
         script: |
           find . -name "Podfile" -execdir pod install \;
@@ -122,8 +140,6 @@ workflows:
     artifacts:
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
-      - flutter_drive.log
-      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
     publishing:
       email:
         recipients:
@@ -133,3 +149,4 @@ workflows:
         key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER # Alphanumeric value that identifies the API key, can also reference environment variable such as $APP_STORE_CONNECT_KEY_IDENTIFIER
         issuer_id: $APP_STORE_CONNECT_ISSUER_ID
         submit_to_testflight: true
+        submit_to_app_store: false
