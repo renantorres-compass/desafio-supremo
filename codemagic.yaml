@@ -36,7 +36,7 @@ workflows:
       - name: Set up key properties
         script: |
           echo $CM_KEYSTORE | base64 --decode > $CM_KEYSTORE_PATH   
-          cat >> "$CM_BUILD_DIR/$project_directory/android/key.properties" <<EOF
+          cat >> "$CM_BUILD_DIR/desafio_supremo/android/key.properties" <<EOF
           storePassword=$CM_KEYSTORE_PASSWORD
           keyPassword=$CM_KEY_PASSWORD
           keyAlias=$CM_KEY_ALIAS
@@ -47,17 +47,17 @@ workflows:
           echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
       - name: Get Flutter packages
         script: |
-          cd $project_directory && flutter packages pub get
+          cd desafio_supremo && flutter packages pub get
       - name: Flutter analyze
         script: |
-          cd $project_directory && flutter analyze
+          cd desafio_supremo && flutter analyze
       - name: Flutter unit tests
         script: |
-          cd $project_directory && flutter test
+          cd desafio_supremo && flutter test
         ignore_failure: false
       - name: Build AppBundle with Flutter
         script: |
-          cd $project_directory && flutter build appbundle --release --build-name=1.0.0 --build-number=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks "$GOOGLE_PLAY_TRACK") + 1))
+          cd desafio_supremo && flutter build appbundle --release --build-name=1.0.0 --build-number=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks "$GOOGLE_PLAY_TRACK") + 1))
       - name: Build APK with Flutter
         script: |
           cd . && flutter build apk --release --build-name=1.0.0 --build-number=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks "$GOOGLE_PLAY_TRACK") + 1))
@@ -106,13 +106,13 @@ workflows:
     scripts:
       - name: Get Flutter Packages
         script: |
-          cd $project_directory && flutter packages pub get
+          cd desafio_supremo && flutter packages pub get
       - name: Flutter analyze
         script: |
-          cd $project_directory && flutter analyze
+          cd desafio_supremo && flutter analyze
       - name: Flutter unit tests
         script: |
-          cd $project_directory && flutter test
+          cd desafio_supremo && flutter test
         ignore_failure: false
       - name: Pod install
         script: |
